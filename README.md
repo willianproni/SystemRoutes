@@ -25,7 +25,7 @@
     </h3>
 
 <li>
-      Leitura do Arquivo Excel(xlsx) utilizando Dapper(SQL)
+      Leitura do Arquivo Excel(.xlsx) utilizando Dapper(SQL Server)
   
   <hr>
   
