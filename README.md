@@ -30,7 +30,7 @@
   <hr>
   
 <h3>
-    Falta Fazer
+    Falta Fazer:
   </h3>
     
 <li>
