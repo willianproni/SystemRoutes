@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadFileExcel", "ReadFileExcel\ReadFileExcel.csproj", "{116FB5CF-FBE4-4CD2-A98B-FE35F3731023}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReadFileExcel", "ReadFileExcel\ReadFileExcel.csproj", "{116FB5CF-FBE4-4CD2-A98B-FE35F3731023}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{04D942BD-595E-46B2-8F6A-C028C4BD3BD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj", "{04D942BD-595E-46B2-8F6A-C028C4BD3BD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCRouteSystem", "MVCRouteSystem\MVCRouteSystem.csproj", "{207F9080-54FD-480D-8C21-2E1CD42278BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{04D942BD-595E-46B2-8F6A-C028C4BD3BD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04D942BD-595E-46B2-8F6A-C028C4BD3BD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04D942BD-595E-46B2-8F6A-C028C4BD3BD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{207F9080-54FD-480D-8C21-2E1CD42278BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{207F9080-54FD-480D-8C21-2E1CD42278BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{207F9080-54FD-480D-8C21-2E1CD42278BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{207F9080-54FD-480D-8C21-2E1CD42278BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
