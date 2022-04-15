@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32126.317
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadFileExcel", "ReadFileExcel\ReadFileExcel.csproj", "{116FB5CF-FBE4-4CD2-A98B-FE35F3731023}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{04D942BD-595E-46B2-8F6A-C028C4BD3BD9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{116FB5CF-FBE4-4CD2-A98B-FE35F3731023}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{116FB5CF-FBE4-4CD2-A98B-FE35F3731023}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{116FB5CF-FBE4-4CD2-A98B-FE35F3731023}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{116FB5CF-FBE4-4CD2-A98B-FE35F3731023}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04D942BD-595E-46B2-8F6A-C028C4BD3BD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04D942BD-595E-46B2-8F6A-C028C4BD3BD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04D942BD-595E-46B2-8F6A-C028C4BD3BD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04D942BD-595E-46B2-8F6A-C028C4BD3BD9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6A67F3B4-B2DD-438F-9291-A93B54B4FD6D}
+	EndGlobalSection
+EndGlobal
