@@ -6,7 +6,7 @@
   
   <hr>
  
-  <h2>bibliotecas utilizadas</h2>
+  <h2>Bibliotecas utilizadas</h2>
   
   <li>
     EPPlus
