@@ -26,6 +26,8 @@
 
 <li>
       Leitura do Arquivo Excel(.xlsx) utilizando Dapper(SQL Server)
+    <li>
+    Converter em Word(Arquivo .doc)
   
   <hr>
   
@@ -35,5 +37,3 @@
     
 <li>
   MVC de Interação
-  <li>
-    Converter em Word(Arquivo .doc)
