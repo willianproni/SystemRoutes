@@ -1,9 +1,25 @@
 <h1>
   Sistema de Rotas
+  </h1>
+  
+  <p>Objetivo, Desenvolver um Projeto para "Cadastrar" rotas de serviço de uma determinada empresa, com as informações de rotas gerar um relatório Word(.doc) a respeito do dia atual, mostrando todas as rotas realizadas naquele determinado dia!!</p>
   
   <hr>
  
+  <h2>bibliotecas utilizadas</h2>
+  
+  <li>
+    EPPlus
+  <li>
+    Dapper
+    <li>
+      Microsoft.Extensions.Configuration.FileExtensions
+      <li>
+        Microsoft.Extensions.Configuration.Json
  
+  <hr>
+        
+        
   <h3>
     Feito até o Momento:
     </h3>
