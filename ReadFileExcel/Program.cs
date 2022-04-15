@@ -56,11 +56,26 @@ namespace ReadFileExcel
                     rota.Complemento = worksheet.Cells[row, 29].Value.ToString();
                     rota.Cep = worksheet.Cells[row, 30].Value.ToString();
                     rota.Bairro = worksheet.Cells[row, 32].Value.ToString();
-
-                    rotaService.Add(rota);
+                    //rotaService.Add(rota);
                     response.Add(rota);
-                    
                 }
+
+                var arquivo = new StreamWriter(@"C:\Test\excel.docx");
+
+                arquivo.WriteLine("nome, emial");
+
+                foreach (var item in response)
+                {
+                    var linha = $"OS:{item.OS}, Base:{item.Base}" +
+                                $"\nCep: {item.Cep}" +
+                                $"\nEndereço: {item.Endereco} Nº: {item.Numero}" +
+                                $"\nBairro: {item.Bairro} Complemento: {item.Complemento}" +
+                                $"\nServiço: {item.Servico}" +
+                                $"\n--------------------------------------------------------------\n";
+                    arquivo.WriteLine(linha);
+                }
+
+                arquivo.Close();
             }
             return response;
         }
