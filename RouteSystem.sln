@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVCRouteSystem", "MVCRouteSystem\MVCRouteSystem.csproj", "{207F9080-54FD-480D-8C21-2E1CD42278BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroServiceRotas", "MicroServiceRotas\MicroServiceRotas.csproj", "{70CF8A1D-D348-499C-8297-B0AC2653A333}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroServicePerson", "MicroServiceRotas\MicroServicePerson.csproj", "{70CF8A1D-D348-499C-8297-B0AC2653A333}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroServiceCity", "MicroServiceCity\MicroServiceCity.csproj", "{F5C001E6-4966-4E6B-A3E5-07AE6A534975}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{70CF8A1D-D348-499C-8297-B0AC2653A333}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70CF8A1D-D348-499C-8297-B0AC2653A333}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70CF8A1D-D348-499C-8297-B0AC2653A333}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5C001E6-4966-4E6B-A3E5-07AE6A534975}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5C001E6-4966-4E6B-A3E5-07AE6A534975}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5C001E6-4966-4E6B-A3E5-07AE6A534975}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5C001E6-4966-4E6B-A3E5-07AE6A534975}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

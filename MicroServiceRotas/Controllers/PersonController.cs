@@ -42,7 +42,7 @@ namespace MicroServiceRotas.Controllers
 
             _personService.Create(newPerson);
 
-            return CreatedAtRoute("GetPerson", new { nome = newPerson.Name }, newPerson);
+            return CreatedAtRoute("GetPerson", new { nome = newPerson.Name }, newPerson);.
         }
 
         [HttpPut("{nome}")]
