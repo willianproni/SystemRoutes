@@ -31,7 +31,7 @@ namespace ReadFileExcel
         {
             var response = new List<Rota>();
 
-            RotaService rotaService = new RotaService();
+            //RotaService rotaService = new RotaService();
 
             FileInfo ExistingFile = new FileInfo(@"C:\5by5\RouteSystem\rotasreadexcel.xlsx");
 
@@ -71,7 +71,7 @@ namespace ReadFileExcel
                                 $"\nEndereço: {item.Endereco} Nº: {item.Numero}" +
                                 $"\nBairro: {item.Bairro} Complemento: {item.Complemento}" +
                                 $"\nServiço: {item.Servico}" +
-                                $"\n--------------------------------------------------------------\n";
+                                $"\n------------------------------------------------------------\n";
                     arquivo.WriteLine(linha);
                 }
 
