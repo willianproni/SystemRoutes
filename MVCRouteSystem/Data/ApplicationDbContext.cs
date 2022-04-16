@@ -14,5 +14,7 @@ namespace MVCRouteSystem.Data
         {
         }
         public DbSet<MVCRouteSystem.Models.Person> Person { get; set; }
+        public DbSet<MVCRouteSystem.Models.City> City { get; set; }
+        public DbSet<MVCRouteSystem.Models.Team> Team { get; set; }
     }
 }
