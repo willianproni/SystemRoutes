@@ -28,6 +28,10 @@
       Leitura do Arquivo Excel(.xlsx) utilizando Dapper(SQL Server)
     <li>
     Converter em Word(Arquivo .doc)
+          <li>
+    API de Pessoas
+                <li>
+    API de Cidades
   
   <hr>
   
