@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using MicroServiceTeam.Repository;
 using Model.MongoDb;
 using MongoDB.Driver;
+using Services;
 
 namespace MicroServiceTeam.Service
 {
@@ -22,8 +24,11 @@ namespace MicroServiceTeam.Service
         public Team Get(string nameTeam) =>
             _team.Find<Team>(team => team.NameTeam == nameTeam).FirstOrDefault();
 
-        public Team Create (Team newTeam)
+        public async Task<Team> Create (Team newTeam)
         {
+            var seachCityInApi = await SeachApi.SeachCityNameInApi(newTeam.City.NameCity);
+
+            newTeam.City = seachCityInApi;
             _team.InsertOne(newTeam);
             return newTeam;
         }

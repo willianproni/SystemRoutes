@@ -12,7 +12,8 @@ namespace Model.MongoDb
         [BsonId]
         [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
         public string Id { get; set; }
-        public bool Status  => true;
         public string Name { get; set; }
+        public Team Team { get; set; }
+
     }
 }
