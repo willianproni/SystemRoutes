@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model
+namespace Model.MongoDb
 {
-    public class City
+    public class Team
     {
         public string Id { get; set; }
-        public string NameCity { get; set; }
-        public string State { get; set; }
+        public string NameTeam { get; set; }
+        public City City { get; set; }
+        public Person Person { get; set; }
     }
 }

@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Model.MongoDb
+namespace Model
 {
-    public class Person
+    public class City
     {
         [BsonId]
         [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
         public string Id { get; set; }
-        public bool Status  => true;
-        public string Name { get; set; }
+        public string NameCity { get; set; }
+        public string State { get; set; }
     }
 }
