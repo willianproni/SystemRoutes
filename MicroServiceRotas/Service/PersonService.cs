@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using MicroServiceRotas.Repository;
 using Model.MongoDb;
 using MongoDB.Driver;
+using Services;
 
 namespace MicroServiceRotas.Service
 {
@@ -22,8 +24,11 @@ namespace MicroServiceRotas.Service
         public Person Get(string name) =>
             _person.Find<Person>(person => person.Name == name).FirstOrDefault();
 
-        public Person Create(Person newPerson)
+        public async Task<Person> Create(Person newPerson)
         {
+            var seachTeam = await SeachApi.SeachTeamNameInApi(newPerson.Team.NameTeam);
+
+            newPerson.Team = seachTeam;
             _person.InsertOne(newPerson);
             return newPerson;
         }
