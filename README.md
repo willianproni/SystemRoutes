@@ -32,8 +32,16 @@
     API de Pessoas
                 <li>
     API de Cidades
-                                  <li>
+                  <li>
     API do Time
+                      <li>
+    MVC de Pessoa (Index, Create)
+                   <li>
+    MVC de Cidade (Index, Create)
+                            <li>
+    MVC de Time (Index, Create)
+                          <li>
+    MVC de Documento (button Upload) 
   
   <hr>
   
@@ -42,4 +50,10 @@
   </h3>
     
 <li>
-  MVC de Interação
+  Editar e delete MVC
+  <li>
+  CheckBox de opções Documento
+  
+  <hr>
+  Obs: Ao cadastrar no MVC o novo regristro pode não aparecer, realizar a atualização da página para aparecer o novo registro
+    
