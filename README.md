@@ -51,6 +51,8 @@
     
 <li>
   Editar e delete MVC
+  <li>
+  CheckBox de opções Documento
   
   <hr>
   Obs: Ao cadastrar no MVC o novo regristro pode não aparecer, realizar a atualização da página para aparecer o novo registro
