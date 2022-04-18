@@ -65,7 +65,6 @@ namespace MVCMongoDbRouteSystem.Controllers
             {
                 team.City = seachCity;
                 SeachApi.PostTeam(team);
-                //SeachApi.UpdateTeam(team.Id, new Team() { Id = team.Id, City = seachCity, NameTeam = team.NameTeam });
                 return RedirectToAction(nameof(Index));
             }
             return View(team);

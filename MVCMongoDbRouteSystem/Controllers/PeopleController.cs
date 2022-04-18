@@ -55,12 +55,16 @@ namespace MVCMongoDbRouteSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Person person)
+        public async Task<IActionResult> Create([Bind("Id,Name,Team")] Person person)
         {
+
+            var teamCheck = Request.Form["Team"].FirstOrDefault();
+            var seachTeam = await SeachApi.SeachTeamNameInApi(teamCheck);
+
             if (ModelState.IsValid)
             {
+                person.Team = seachTeam;
                 _context.Add(person);
-                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(person);

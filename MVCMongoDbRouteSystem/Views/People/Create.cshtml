@@ -1,4 +1,6 @@
-﻿@model Model.MongoDb.Person
+﻿@using Model.MongoDb
+@using Services
+@model Model.MongoDb.Person
 
 @{
     ViewData["Title"] = "Create";
@@ -13,15 +15,22 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
+           <div class="form-group">
+				</> <label asp-for="Team" class="control-label"></label><br />
+				<select asp-for="Team" id="City">
+					@{
+						foreach (var team in await SeachApi.GetAllTeamInApi())
+						{
+							<option value="@team.NameTeam"> @team.NameTeam </option>
+						}
+					}
+				</select>
+				<span asp-validation-for="Team" class="text-danger"></span>
+			</div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

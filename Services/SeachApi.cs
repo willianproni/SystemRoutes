@@ -87,6 +87,21 @@ namespace Services
                 throw;
             }
         }
+        public static async Task<Team> SeachTeamNameInApi(string nameTeam)
+        {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync("https://localhost:44345/api/Team/" + nameTeam);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                var teamJson = JsonConvert.DeserializeObject<Team>(responseBody);
+                return teamJson;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         #endregion
 
@@ -114,21 +129,7 @@ namespace Services
         #endregion
 
 
-        public static async Task<Team> SeachTeamNameInApi(string nameTeam)
-        {
-            try
-            {
-                HttpResponseMessage response = await client.GetAsync("https://localhost:44345/api/Team/" + nameTeam);
-                response.EnsureSuccessStatusCode();
-                string responseBody = await response.Content.ReadAsStringAsync();
-                var cityJson = JsonConvert.DeserializeObject<Team>(responseBody);
-                return cityJson;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+
 
     }
 }

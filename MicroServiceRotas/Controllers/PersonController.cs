@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using MicroServiceRotas.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -33,14 +34,11 @@ namespace MicroServiceRotas.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Person> Create(Person newPerson)
+        public async Task<ActionResult<Person>> Create(Person newPerson)
         {
             var seachPerson = _personService.Get(newPerson.Name);
 
-            if (seachPerson != null)
-                return BadRequest("Pessoa Já cadastrada");
-
-            _personService.Create(newPerson);
+            await _personService.Create(newPerson);
 
             return CreatedAtRoute("GetPerson", new { nome = newPerson.Name }, newPerson);
         }
