@@ -32,6 +32,8 @@
     API de Pessoas
                 <li>
     API de Cidades
+                                  <li>
+    API do Time
   
   <hr>
   
