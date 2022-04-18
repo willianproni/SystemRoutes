@@ -32,8 +32,16 @@
     API de Pessoas
                 <li>
     API de Cidades
-                                  <li>
+                  <li>
     API do Time
+                      <li>
+    MVC de Pessoa (Index, Create)
+                   <li>
+    MVC de Cidade (Index, Create)
+                            <li>
+    MVC de Time (Index, Create)
+                          <li>
+    MVC de Documento (button Upload) 
   
   <hr>
   
@@ -42,4 +50,4 @@
   </h3>
     
 <li>
-  MVC de Interação
+  Editar e delete MVC
