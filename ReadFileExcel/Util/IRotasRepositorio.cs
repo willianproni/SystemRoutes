@@ -9,7 +9,7 @@ namespace ReadFileExcel.Util
 {
     public interface IRotasRepositorio
     {
-        bool Add(Rota rota);
-        List<Rota> GetAll();
+        bool Add(Route rota);
+        List<Route> GetAll();
     }
 }

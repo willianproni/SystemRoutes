@@ -18,19 +18,19 @@ namespace ReadFileExcel.Util
         {
             _connection = DataBaseConfiguration.Get();
         }
-        public bool Add(Rota rota)
+        public bool Add(Route rota)
         {
             bool status = false;
 
             using (var dataBase = new SqlConnection(_connection))
             {
                 dataBase.Open();
-                dataBase.Execute(Rota.INSERT, rota);
+                dataBase.Execute(Route.INSERT, rota);
             }
             return status;
         }
 
-        public List<Rota> GetAll()
+        public List<Route> GetAll()
         {
             throw new NotImplementedException();
         }

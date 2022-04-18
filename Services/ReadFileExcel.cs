@@ -1,32 +1,16 @@
 ﻿using System;
-using OfficeOpenXml;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Model;
-using ReadFileExcel.Services;
+using OfficeOpenXml;
 
-namespace ReadFileExcel
+namespace Services
 {
-    public class Program
+    public class ReadFileExcel
     {
-        static void Main(string[] args)
-        {
-            var rotas = ReadXls();
-
-            foreach (var item in rotas)
-            {
-                Console.WriteLine($"OS: {item.OS}" +
-                                  $"\nCidade: {item.Cidade}" +
-                                  $"\nBase: {item.Base}" +
-                                  $"\nServiço: {item.Servico}" +
-                                  $"\nEndereço: {item.Endereco}" +
-                                  $"\nNúmero: {item.Numero}" +
-                                  $"\nComplemento: {item.Complemento}" +
-                                  $"\nCep: {item.Cep}" +
-                                  $"\nBairro: {item.Bairro}\n\n");
-            }
-        }
-
         public static List<Route> ReadXls()
         {
             var response = new List<Route>();

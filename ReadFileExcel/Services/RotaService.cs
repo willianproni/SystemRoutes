@@ -17,7 +17,7 @@ namespace ReadFileExcel.Services
             _rotasRepositorio = new RotasRepositorio();
         }
 
-        public bool Add(Rota rota)
+        public bool Add(Route rota)
         {
             return _rotasRepositorio.Add(rota);
         }

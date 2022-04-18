@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 
 namespace Services
 {
-    public class SeachApi
+    public class SeachApi 
     {
         static readonly HttpClient client = new HttpClient();
 
@@ -128,8 +128,11 @@ namespace Services
 
         #endregion
 
+        #region GetDelete
 
 
+
+        #endregion
 
     }
 }

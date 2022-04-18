@@ -1,0 +1,45 @@
+﻿@model Model.MongoDb.Route
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Rotas Gerador</h1>
+
+<h4>Upload Arquivos</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           @* @using (Html.BeginForm("UploadFile", "Files", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{    
+<div class="text-center">
+	<h4 class="display-3">Upload File</h4>
+	<br/>
+		<div class="form-group">
+			<input class="form-control" multiple type="file" name="file" />
+		</div>
+		<div class="form-group">
+			<input type="submit" value="Upload" class="btn btn-primary" />
+		</div>
+</div>*@
+
+        </form>
+        <form action="ReadXls()">
+            <div class="form-group">
+                <input type="file" value="Create" class="btn btn-primary" />
+                <hr />
+                <input type="submit" value="Enviar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
