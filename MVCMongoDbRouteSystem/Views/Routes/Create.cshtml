@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+ @*       <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
            @* @using (Html.BeginForm("UploadFile", "Files", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {    
@@ -24,9 +24,9 @@
 			<input type="submit" value="Upload" class="btn btn-primary" />
 		</div>
 </div>*@
-
-        </form>
-        <form action="ReadXls()">
+@*
+        </form>*@
+        <form action="ReadXls">
             <div class="form-group">
                 <input type="file" value="Create" class="btn btn-primary" />
                 <hr />

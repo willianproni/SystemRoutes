@@ -23,7 +23,7 @@ namespace MVCMongoDbRouteSystem.Controllers
         // GET: Routes
         public IActionResult Index()
         {
-            return View(new List<ReadFileExcel>());
+            return View(new List<Route>());
         }
 
         // GET: Routes/Details/5
@@ -48,6 +48,12 @@ namespace MVCMongoDbRouteSystem.Controllers
         public IActionResult Create()
         {
             return View();
+        }
+
+        public IActionResult ReadXls()
+        {
+            var rotas = ReadFileExcel.ReadXls();
+            return RedirectToAction(nameof(Index), rotas);
         }
 
         // POST: Routes/Create
