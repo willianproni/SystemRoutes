@@ -4,24 +4,26 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Model;
+using Model.MongoDb;
 using OfficeOpenXml;
 
 namespace Services
 {
     public class ReadFileExcel
     {
-        public static List<Route> ReadXls()
+        public static List<Route> ReadXls(IFormFile excel)
         {
             var response = new List<Route>();
 
             //RotaService rotaService = new RotaService();
 
-            FileInfo ExistingFile = new FileInfo(@"C:\5by5\RouteSystem\rotasreadexcel.xlsx");
+            //FileInfo ExistingFile = new FileInfo(@"C:\5by5\RouteSystem\rotasreadexcel.xlsx");
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
-            using (ExcelPackage package = new ExcelPackage(ExistingFile))
+            using (ExcelPackage package = new ExcelPackage((Stream)excel))
             {
                 ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
 

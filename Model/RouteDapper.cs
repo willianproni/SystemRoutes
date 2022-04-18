@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Model
 {
     [Table("tb_rotas")]
-    public class Route
+    public class RouteDapper
     {
         public readonly static string INSERT = "INSERT INTO tb_rotas(OS, Cidade, Base, Servico, Endereco, Numero, Complemento, Cep, Bairro) values(@OS, @Cidade, @Base, @Servico, @Endereco, @Numero, @Complemento, @Cep, @Bairro)";
 

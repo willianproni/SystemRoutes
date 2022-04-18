@@ -144,6 +144,7 @@ namespace MVCMongoDbRouteSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
+            var seachPerson = SeachApi.SeachTeamNameInApi(id);
             var person = await _context.Person.FindAsync(id);
             _context.Person.Remove(person);
             await _context.SaveChangesAsync();

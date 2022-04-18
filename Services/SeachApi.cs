@@ -130,7 +130,10 @@ namespace Services
 
         #region GetDelete
 
-
+        public static void RemoveTeam(string name)
+        {
+            client.DeleteAsync("https://localhost:44345/api/Team/" + name);
+        }
 
         #endregion
 

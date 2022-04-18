@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using MVCMongoDbRouteSystem.Data;
 using Model.MongoDb;
 using Services;
+using Microsoft.AspNetCore.Http;
 
 namespace MVCMongoDbRouteSystem.Controllers
 {
@@ -21,9 +22,9 @@ namespace MVCMongoDbRouteSystem.Controllers
         }
 
         // GET: Routes
-        public IActionResult Index()
+        public async Task<IActionResult> Index(FormFile excel)
         {
-            return View(new List<Route>());
+            return View( ReadFileExcel.ReadXls(excel).OrderBy(rotas => rotas.Cep));
         }
 
         // GET: Routes/Details/5
@@ -50,11 +51,11 @@ namespace MVCMongoDbRouteSystem.Controllers
             return View();
         }
 
-        public IActionResult ReadXls()
+/*        public IActionResult ReadXls()
         {
             var rotas = ReadFileExcel.ReadXls();
             return RedirectToAction(nameof(Index), rotas);
-        }
+        }*/
 
         // POST: Routes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.

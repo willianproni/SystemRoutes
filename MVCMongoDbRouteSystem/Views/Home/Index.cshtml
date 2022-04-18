@@ -4,5 +4,9 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h5>Escolha o arquivo:</h5>
+        <form method="post" enctype="multipart/form-data" asp-controller="Routes" asp-action="Index">
+            <input type="file" name="pathFile" />
+            <input class="nav-link text-dark" type="submit" value="Enviar" />
+        </form>
 </div>

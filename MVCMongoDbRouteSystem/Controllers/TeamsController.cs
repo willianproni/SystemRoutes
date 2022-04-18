@@ -29,13 +29,9 @@ namespace MVCMongoDbRouteSystem.Controllers
         // GET: Teams/Details/5
         public async Task<IActionResult> Details(string id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var team = await SeachApi.SeachTeamNameInApi(id);
 
-            var team = await _context.Team
-                .FirstOrDefaultAsync(m => m.Id == id);
+        ;//.FirstOrDefaultAsync(m => m.Id == nameTeam);
             if (team == null)
             {
                 return NotFound();
@@ -78,12 +74,13 @@ namespace MVCMongoDbRouteSystem.Controllers
                 return NotFound();
             }
 
-            var team = await _context.Team.FindAsync(id);
-            if (team == null)
+            var seachCity = await SeachApi.SeachTeamNameInApi(id);
+
+            if (id == null)
             {
                 return NotFound();
             }
-            return View(team);
+            return View(id);
         }
 
         // POST: Teams/Edit/5
