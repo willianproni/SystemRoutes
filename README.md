@@ -33,15 +33,11 @@
                 <li>
     API de Cidades
                   <li>
-    API do Time
+    API do Times
                       <li>
-    MVC de Pessoa (Index, Create)
+    CRUD Pessoas
                    <li>
-    MVC de Cidade (Index, Create)
-                            <li>
-    MVC de Time (Index, Create)
-                          <li>
-    MVC de Documento (button Upload) 
+    CRUD Cidades
   
   <hr>
   
@@ -50,9 +46,10 @@
   </h3>
     
 <li>
-  Editar e delete MVC
+   CRUD Times
   <li>
-  CheckBox de opções Documento
+    Gerador de Rota
+  
   
   <hr>
   Obs: Ao cadastrar no MVC o novo regristro pode não aparecer, realizar a atualização da página para aparecer o novo registro
