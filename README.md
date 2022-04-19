@@ -33,11 +33,11 @@
                 <li>
     API de Cidades
                   <li>
-    API do Time
+    API do Times
                       <li>
-    CRUD Pessoa
+    CRUD Pessoas
                    <li>
-    CRUD Cidade
+    CRUD Cidades
   
   <hr>
   
