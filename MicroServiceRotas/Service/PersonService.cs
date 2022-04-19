@@ -21,20 +21,20 @@ namespace MicroServiceRotas.Service
         public List<Person> Get() =>
             _person.Find(person => true).ToList();
 
-        public Person Get(string name) =>
+        public Person GetId(string id) =>
+            _person.Find(person => person.Id == id).FirstOrDefault();
+
+        public Person GetName(string name) =>
             _person.Find<Person>(person => person.Name == name).FirstOrDefault();
 
-        public async Task<Person> Create(Person newPerson)
+        public Person Create(Person newPerson)
         {
-            var seachTeam = await SeachApi.SeachTeamNameInApi(newPerson.Team.NameTeam);
-
-            newPerson.Team = seachTeam;
             _person.InsertOne(newPerson);
             return newPerson;
         }
-
-        public void Update(string name, Person updatePerson) =>
-            _person.ReplaceOne(person => person.Name == name, updatePerson);
+            
+        public void Update(string id, Person updatePerson) =>
+            _person.ReplaceOne(person => person.Id == id, updatePerson);
 
         public void Remove(string name) =>
             _person.DeleteOne(person => person.Name == name);

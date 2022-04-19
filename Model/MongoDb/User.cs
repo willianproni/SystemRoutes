@@ -7,13 +7,13 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Model.MongoDb
 {
-    public class Team
+    public class User
     {
         [BsonId]
         [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
         public string Id { get; set; }
-        public string NameTeam { get; set; }
-        public City City { get; set; }
-        public List<Person> Persons { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
+        public string NameUser { get; set; }
     }
 }

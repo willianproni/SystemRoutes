@@ -22,49 +22,58 @@ namespace MicroServiceRotas.Controllers
         public ActionResult<List<Person>> GetAll() =>
             _personService.Get();
 
-        [HttpGet("{nome}", Name ="GetPerson")]
-        public ActionResult<Person> GetName(string nome)
+        [HttpGet("{id}")]
+        public ActionResult<Person> GetId(string id)
         {
-            var seachPerson = _personService.Get(nome);
+            var seachPerson = _personService.GetId(id);
 
             if (seachPerson == null)
-                return BadRequest("Pessoa não econtranda");
+                return BadRequest("Pessoa não encontrado, confira os dados e tente novamente!");
+
+            return seachPerson;
+        }
+
+        [HttpGet("nome/{nome}", Name ="GetPerson")]
+        public ActionResult<Person> GetName(string nome)
+        {
+            var seachPerson = _personService.GetName(nome);
+
+            if (seachPerson == null)
+                return BadRequest("Pessoa não encontrado, confira os dados e tente novamente!");
 
             return seachPerson;
         }
 
         [HttpPost]
-        public async Task<ActionResult<Person>> Create(Person newPerson)
+        public ActionResult<Person> Create(Person newPerson)
         {
-            var seachPerson = _personService.Get(newPerson.Name);
-
-            await _personService.Create(newPerson);
+            _personService.Create(newPerson);
 
             return CreatedAtRoute("GetPerson", new { nome = newPerson.Name }, newPerson);
         }
 
-        [HttpPut("{nome}")]
-        public IActionResult Update(string nome, Person updatePerson)
+        [HttpPut("{id}")]
+        public IActionResult Update(string id, Person updatePerson)
         {
-            var seachPerson = _personService.Get(nome);
+            var seachPerson = _personService.GetId(id);
 
             if (seachPerson == null)
-                return BadRequest("Pessoa não cadastrada!");
+                return BadRequest("Pessoa não encontrado, confira os dados e tente novamente!");
 
-            _personService.Update(nome, updatePerson);
+            _personService.Update(id, updatePerson);
 
             return NoContent();
         }
 
-        [HttpDelete("{nome}")]
-        public IActionResult Delete(string nome)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(string id)
         {
-            var seachPerson = _personService.Get(nome);
+            var seachPerson = _personService.GetId(id);
 
             if (seachPerson == null)
-                return BadRequest("Pessoa não cadastrada!");
+                return BadRequest("Pessoa não encontrado, confira os dados e tente novamente!");
 
-            _personService.Remove(nome);
+            _personService.Remove(id);
 
             return NoContent();
         }

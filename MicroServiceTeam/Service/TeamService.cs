@@ -24,10 +24,34 @@ namespace MicroServiceTeam.Service
         public Team Get(string nameTeam) =>
             _team.Find<Team>(team => team.NameTeam == nameTeam).FirstOrDefault();
 
-        public async Task<Team> Create (Team newTeam)
+        public async Task<Team> Create(Team newTeam)
         {
+            var personList = new List<Person>();
+
+            foreach (var item in newTeam.Persons)
+            {
+                try
+                {
+                    Person verifyPerson = await SeachApi.SeachPersonNameInApiAsync(item.Name);
+                    SeachApi.UpdatePerson(verifyPerson.Id, new Person()
+                    {
+                        Id = verifyPerson.Id,
+                        Name = verifyPerson.Name,
+                        Active = false
+                    });
+                    verifyPerson.Active = !verifyPerson.Active;
+                    personList.Add(verifyPerson);
+
+                }
+                catch (System.Exception)
+                {
+
+                    throw;
+                }
+            }
             var seachCityInApi = await SeachApi.SeachCityNameInApi(newTeam.City.NameCity);
 
+            newTeam.Persons = personList;
             newTeam.City = seachCityInApi;
             _team.InsertOne(newTeam);
             return newTeam;

@@ -60,7 +60,7 @@ namespace MicroServiceTeam.Controllers
         }
 
         [HttpDelete("{time}")]
-        public IActionResult Delete (string time)
+        public IActionResult Delete(string time)
         {
             var seachTeam = _teamService.Get(time);
 

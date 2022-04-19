@@ -103,6 +103,23 @@ namespace Services
             }
         }
 
+        public static async Task<Person> SeachPersonNameInApiAsync(string namePerson)
+        {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync("https://localhost:44302/api/Person/nome/" + namePerson);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                var PersonJson = JsonConvert.DeserializeObject<Person>(responseBody);
+                return PersonJson;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         #endregion
 
         #region PostApi
@@ -124,6 +141,11 @@ namespace Services
         public static void UpdateTeam(string id, Team updateTeam)
         {
             client.PutAsJsonAsync("https://localhost:44345/api/Team/" + id, updateTeam);
+        }
+
+        public static void UpdatePerson(string id, Person updatePerson)
+        {
+            client.PutAsJsonAsync("https://localhost:44302/api/Person/" + id, updatePerson);
         }
 
         #endregion

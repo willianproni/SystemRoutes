@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReadFileExcel", "ReadFileExcel\ReadFileExcel.csproj", "{116FB5CF-FBE4-4CD2-A98B-FE35F3731023}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj", "{04D942BD-595E-46B2-8F6A-C028C4BD3BD9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroServicePerson", "MicroServiceRotas\MicroServicePerson.csproj", "{70CF8A1D-D348-499C-8297-B0AC2653A333}"
@@ -17,16 +15,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Servic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVCMongoDbRouteSystem", "MVCMongoDbRouteSystem\MVCMongoDbRouteSystem.csproj", "{9B5AEF79-1046-4298-BB92-B94377554B40}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroServiceUser", "MicroServiceUser\MicroServiceUser.csproj", "{81BCF4D5-D5AC-4EC0-AC9E-FB9F27345B72}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{116FB5CF-FBE4-4CD2-A98B-FE35F3731023}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{116FB5CF-FBE4-4CD2-A98B-FE35F3731023}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{116FB5CF-FBE4-4CD2-A98B-FE35F3731023}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{116FB5CF-FBE4-4CD2-A98B-FE35F3731023}.Release|Any CPU.Build.0 = Release|Any CPU
 		{04D942BD-595E-46B2-8F6A-C028C4BD3BD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{04D942BD-595E-46B2-8F6A-C028C4BD3BD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04D942BD-595E-46B2-8F6A-C028C4BD3BD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -51,6 +47,10 @@ Global
 		{9B5AEF79-1046-4298-BB92-B94377554B40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B5AEF79-1046-4298-BB92-B94377554B40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B5AEF79-1046-4298-BB92-B94377554B40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81BCF4D5-D5AC-4EC0-AC9E-FB9F27345B72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81BCF4D5-D5AC-4EC0-AC9E-FB9F27345B72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81BCF4D5-D5AC-4EC0-AC9E-FB9F27345B72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81BCF4D5-D5AC-4EC0-AC9E-FB9F27345B72}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
