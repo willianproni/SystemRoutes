@@ -46,9 +46,9 @@
   </h3>
     
 <li>
-  Editar e delete MVC
+   CRUD Times
   <li>
-  CheckBox de opções Documento
+  Excel
   
   <hr>
   Obs: Ao cadastrar no MVC o novo regristro pode não aparecer, realizar a atualização da página para aparecer o novo registro
