@@ -134,8 +134,7 @@ namespace MVCMongoDbRouteSystem.Controllers
                 return NotFound();
             }
 
-            var team = await _context.Team
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var team = await SeachApi.SeachTeamIdInApiAsync(id);
             if (team == null)
             {
                 return NotFound();
@@ -149,9 +148,8 @@ namespace MVCMongoDbRouteSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var team = await _context.Team.FindAsync(id);
-            _context.Team.Remove(team);
-            await _context.SaveChangesAsync();
+            var team = await SeachApi.SeachTeamIdInApiAsync(id);
+
             return RedirectToAction(nameof(Index));
         }
 

@@ -22,13 +22,24 @@ namespace MicroServiceTeam.Controllers
         public ActionResult<List<Team>> GetAll() =>
             _teamService.Get();
 
-        [HttpGet("{time}", Name = "GetTeam")]
+        [HttpGet("{id}")]
+        public ActionResult<Team> GetIdTeam(string id)
+        {
+            var seachTeam = _teamService.GetId(id);
+
+            if (seachTeam == null)
+                return Conflict("Time não cadastrado, verifique as informações e tente novamento!");
+
+            return seachTeam;
+        }
+
+        [HttpGet("time/{time}", Name = "GetTeam")]
         public ActionResult<Team> GetNameTeam(string time)
         {
             var seachTeam = _teamService.Get(time);
 
             if (seachTeam == null)
-                return Conflict("Time não Cadastrado!");
+                return Conflict("Time não cadastrado, verifique as informações e tente novamento!");
 
             return seachTeam;
         }
@@ -39,7 +50,7 @@ namespace MicroServiceTeam.Controllers
             var seachTeam = _teamService.Get(newTeam.NameTeam);
 
             if (seachTeam != null)
-                return Conflict("Time já cadastrado!");
+                return Conflict("Nome de Time já cadastrado, troque o nome e tente novamente!");
 
             await _teamService.Create(newTeam);
 
@@ -52,22 +63,22 @@ namespace MicroServiceTeam.Controllers
             var seachTeam = _teamService.Get(time);
 
             if (seachTeam == null)
-                return Conflict("Time não encontrado!");
+                return Conflict("Time não cadastrado, verifique as informações e tente novamento!");
 
             _teamService.Update(time, updateTime);
 
             return NoContent();
         }
 
-        [HttpDelete("{time}")]
-        public IActionResult Delete(string time)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(string id)
         {
-            var seachTeam = _teamService.Get(time);
+            var seachTeam = _teamService.GetId(id);
 
             if (seachTeam == null)
-                return Conflict("Time não encontrado!");
+                return Conflict("Time não cadastrado, verifique as informações e tente novamento!");
 
-            _teamService.Remove(time);
+            _teamService.Remove(id);
 
             return NoContent();
         }

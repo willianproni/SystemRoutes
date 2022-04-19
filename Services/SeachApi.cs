@@ -123,6 +123,24 @@ namespace Services
             }
         }
 
+        public static async Task<Team> SeachTeamIdInApiAsync(string id)
+        {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync("https://localhost:44345/api/Team/" + id);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                var TeamJson = JsonConvert.DeserializeObject<Team>(responseBody);
+                return TeamJson;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
         #endregion
 
         #region GetName

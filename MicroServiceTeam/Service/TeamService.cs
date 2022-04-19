@@ -21,6 +21,9 @@ namespace MicroServiceTeam.Service
         public List<Team> Get() =>
             _team.Find(team => true).ToList();
 
+        public Team GetId(string id) =>
+            _team.Find(team => team.Id == id).FirstOrDefault();
+
         public Team Get(string nameTeam) =>
             _team.Find<Team>(team => team.NameTeam == nameTeam).FirstOrDefault();
 
@@ -60,9 +63,9 @@ namespace MicroServiceTeam.Service
         public void Update(string nameTeam, Team updateTeam) =>
             _team.ReplaceOne(team => team.NameTeam == nameTeam, updateTeam);
 
-        public async void Remove(string nameTeam)
+        public async void Remove(string id)
         {
-            var verifyTeam = await SeachApi.SeachTeamNameInApi(nameTeam);
+            var verifyTeam = await SeachApi.SeachTeamIdInApiAsync(id);
 
             foreach (var item in verifyTeam.Persons)
             {
@@ -74,7 +77,7 @@ namespace MicroServiceTeam.Service
                 });
             }
 
-            _team.DeleteOne(team => team.NameTeam == nameTeam);
+            _team.DeleteOne(team => team.Id == id);
         }
 
     }
