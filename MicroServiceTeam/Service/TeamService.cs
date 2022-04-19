@@ -60,7 +60,22 @@ namespace MicroServiceTeam.Service
         public void Update(string nameTeam, Team updateTeam) =>
             _team.ReplaceOne(team => team.NameTeam == nameTeam, updateTeam);
 
-        public void Remove(string nameTeam) =>
+        public async void Remove(string nameTeam)
+        {
+            var verifyTeam = await SeachApi.SeachTeamNameInApi(nameTeam);
+
+            foreach (var item in verifyTeam.Persons)
+            {
+                SeachApi.UpdatePerson(item.Id, new Person()
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Active = true
+                });
+            }
+
             _team.DeleteOne(team => team.NameTeam == nameTeam);
+        }
+
     }
 }
