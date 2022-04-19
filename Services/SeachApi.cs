@@ -72,6 +72,44 @@ namespace Services
 
         #region GetId
 
+        public static async Task<Person> SeachPersonIdInApiAsync(string id)
+        {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync("https://localhost:44302/api/Person/" + id);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                var PersonJson = JsonConvert.DeserializeObject<Person>(responseBody);
+                return PersonJson;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public static async Task<City> SeachCityIdInApiAsync(string id)
+        {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync("https://localhost:44394/api/City/" + id);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                var CityJson = JsonConvert.DeserializeObject<City>(responseBody);
+                return CityJson;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        #endregion
+
+        #region GetName
+
         public static async Task<City> SeachCityNameInApi(string nameCity)
         {
             try
@@ -120,23 +158,6 @@ namespace Services
             }
         }
 
-        public static async Task<Person> SeachPersonIdInApiAsync(string id)
-        {
-            try
-            {
-                HttpResponseMessage response = await client.GetAsync("https://localhost:44302/api/Person/" + id);
-                response.EnsureSuccessStatusCode();
-                string responseBody = await response.Content.ReadAsStringAsync();
-                var PersonJson = JsonConvert.DeserializeObject<Person>(responseBody);
-                return PersonJson;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
         #endregion
 
         #region PostApi
@@ -170,6 +191,11 @@ namespace Services
             client.PutAsJsonAsync("https://localhost:44302/api/Person/" + id, updatePerson);
         }
 
+        public static void UpdateCity(string id, City updateCity)
+        {
+            client.PutAsJsonAsync("https://localhost:44394/api/City/" + id, updateCity);
+        }
+
         #endregion
 
         #region GetDelete
@@ -182,6 +208,11 @@ namespace Services
         public static void RemovePerson(string id)
         {
             client.DeleteAsync("https://localhost:44302/api/Person/" + id);
+        }
+
+        public static void RemoveCity(string id)
+        {
+            client.DeleteAsync("https://localhost:44394/api/City/" + id);
         }
 
         #endregion

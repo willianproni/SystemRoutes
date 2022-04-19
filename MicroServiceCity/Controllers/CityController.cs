@@ -21,15 +21,26 @@ namespace MicroServiceCity.Controllers
         public ActionResult<List<City>> GetAll() =>
             _cityService.Get();
 
-        [HttpGet("{cidade}")]
+        [HttpGet("{id}")]
+        public ActionResult<City> Getid(string id)
+        {
+            var seachCity = _cityService.GetId(id);
+
+            if (seachCity == null)
+                return BadRequest("Cidade não encontrada, verifique as informações e tente novamente!");
+
+            return seachCity;
+        }
+
+        [HttpGet("cidade/{cidade}")]
         public ActionResult<City> GetNameCity(string cidade)
         {
-            var SeachCity = _cityService.Get(cidade);
+            var seachCity = _cityService.Get(cidade);
 
-            if (SeachCity == null)
-                return BadRequest("Cidade não encontrada!");
+            if (seachCity == null)
+                return BadRequest("Cidade não encontrada, verifique as informações e tente novamente!");
 
-            return SeachCity;
+            return seachCity;
         }
 
         [HttpPost]
@@ -45,28 +56,28 @@ namespace MicroServiceCity.Controllers
             return CreatedAtRoute("GetPerson", new { cidade = newCity.NameCity }, newCity);
         }
 
-        [HttpPut("{cidade}")]
-        public IActionResult Update(string cidade, City updateCity)
+        [HttpPut("{id}")]
+        public IActionResult Update(string id, City updateCity)
         {
-            var seachCity = _cityService.Get(cidade);
+            var seachCity = _cityService.GetId(id);
 
             if (seachCity == null)
-                return NotFound("Cidade não cadastrada!");
+                return NotFound("Cidade não encontrada, verifique as informações e tente novamente!");
 
-            _cityService.Update(cidade, updateCity);
+            _cityService.Update(id, updateCity);
 
             return NoContent();
         }
 
-        [HttpDelete("{cidade}")]
-        public IActionResult Delete(string cidade)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(string id)
         {
-            var seachCity = _cityService.Get(cidade);
+            var seachCity = _cityService.GetId(id);
 
             if (seachCity == null)
-                return NotFound("Cidade não cadastrada!");
+                return NotFound("Cidade não encontrada, verifique as informações e tente novamente!");
 
-            _cityService.Remove(cidade);
+            _cityService.Remove(id);
 
             return NoContent();
         }

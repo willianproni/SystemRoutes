@@ -34,14 +34,13 @@ namespace MVCMongoDbRouteSystem.Controllers
                 return NotFound();
             }
 
-            var city = await _context.City
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (city == null)
+            var seachCity = await SeachApi.SeachCityIdInApiAsync(id);
+            if (seachCity == null)
             {
                 return NotFound();
             }
 
-            return View(city);
+            return View(seachCity);
         }
 
         // GET: Cities/Create
@@ -73,12 +72,12 @@ namespace MVCMongoDbRouteSystem.Controllers
                 return NotFound();
             }
 
-            var city = await _context.City.FindAsync(id);
-            if (city == null)
+            var seachCity = await SeachApi.SeachCityIdInApiAsync(id);
+            if (seachCity == null)
             {
                 return NotFound();
             }
-            return View(city);
+            return View(seachCity);
         }
 
         // POST: Cities/Edit/5
@@ -97,8 +96,8 @@ namespace MVCMongoDbRouteSystem.Controllers
             {
                 try
                 {
-                    _context.Update(city);
-                    await _context.SaveChangesAsync();
+                    var seachCity = await SeachApi.SeachCityIdInApiAsync(id);
+                    SeachApi.UpdateCity(id, city);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -124,14 +123,13 @@ namespace MVCMongoDbRouteSystem.Controllers
                 return NotFound();
             }
 
-            var city = await _context.City
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (city == null)
+            var seachCity = await SeachApi.SeachCityIdInApiAsync(id);
+            if (seachCity == null)
             {
                 return NotFound();
             }
 
-            return View(city);
+            return View(seachCity);
         }
 
         // POST: Cities/Delete/5
@@ -139,9 +137,8 @@ namespace MVCMongoDbRouteSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var city = await _context.City.FindAsync(id);
-            _context.City.Remove(city);
-            await _context.SaveChangesAsync();
+            var seachCity = await SeachApi.SeachCityIdInApiAsync(id);
+            SeachApi.RemoveCity(id);
             return RedirectToAction(nameof(Index));
         }
 

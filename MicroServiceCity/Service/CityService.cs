@@ -19,6 +19,9 @@ namespace MicroServiceCity.Service
         public List<City> Get() =>
             _city.Find(city => true).ToList();
 
+        public City GetId(string id) =>
+            _city.Find(city => city.Id == id).FirstOrDefault();
+
         public City Get(string nameCity) =>
             _city.Find<City>(city => city.NameCity == nameCity).FirstOrDefault();
 
@@ -28,10 +31,10 @@ namespace MicroServiceCity.Service
             return newCity;
         }
 
-        public void Update(string nameCity, City updateCity) =>
-            _city.ReplaceOne(city => city.NameCity == nameCity, updateCity);
+        public void Update(string id, City updateCity) =>
+            _city.ReplaceOne(city => city.Id == id, updateCity);
 
-        public void Remove(string nameCity) =>
-            _city.DeleteOne(city => city.NameCity == nameCity);
+        public void Remove(string id) =>
+            _city.DeleteOne(city => city.Id == id);
     }
 }

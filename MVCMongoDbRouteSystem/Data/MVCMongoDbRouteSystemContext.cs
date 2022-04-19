@@ -21,8 +21,6 @@ namespace MVCMongoDbRouteSystem.Data
 
         public DbSet<Model.MongoDb.Team> Team { get; set; }
 
-        //public DbSet<Model.Route> Rota { get; set; }
-
         public DbSet<Model.MongoDb.Route> Route { get; set; }
     }
 }
