@@ -19,18 +19,6 @@
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-           <div class="form-group">
-				</> <label asp-for="Team" class="control-label"></label><br />
-				<select asp-for="Team" id="City">
-					@{
-						foreach (var team in await SeachApi.GetAllTeamInApi())
-						{
-							<option value="@team.NameTeam"> @team.NameTeam </option>
-						}
-					}
-				</select>
-				<span asp-validation-for="Team" class="text-danger"></span>
-			</div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

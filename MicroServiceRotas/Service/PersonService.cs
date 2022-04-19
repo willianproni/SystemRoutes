@@ -36,7 +36,7 @@ namespace MicroServiceRotas.Service
         public void Update(string id, Person updatePerson) =>
             _person.ReplaceOne(person => person.Id == id, updatePerson);
 
-        public void Remove(string name) =>
-            _person.DeleteOne(person => person.Name == name);
+        public void Remove(string id) =>
+            _person.DeleteOne(person => person.Id == id);
     }
 }

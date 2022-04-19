@@ -34,8 +34,7 @@ namespace MVCMongoDbRouteSystem.Controllers
                 return NotFound();
             }
 
-            var person = await _context.Person
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var person = await SeachApi.SeachPersonIdInApiAsync(id);
             if (person == null)
             {
                 return NotFound();
@@ -55,16 +54,13 @@ namespace MVCMongoDbRouteSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Team")] Person person)
+        public IActionResult Create([Bind("Id,Name,Team")] Person person)
         {
-
-            var teamCheck = Request.Form["Team"].FirstOrDefault();
-            var seachTeam = await SeachApi.SeachTeamNameInApi(teamCheck);
-
             if (ModelState.IsValid)
             {
-                person.Team = seachTeam;
-                _context.Add(person);
+                person.Active = !person.Active;
+                SeachApi.PostPerson(person);
+                // _context.Add(person);
                 return RedirectToAction(nameof(Index));
             }
             return View(person);
@@ -78,7 +74,7 @@ namespace MVCMongoDbRouteSystem.Controllers
                 return NotFound();
             }
 
-            var person = await _context.Person.FindAsync(id);
+            var person = await SeachApi.SeachPersonIdInApiAsync(id);
             if (person == null)
             {
                 return NotFound();
@@ -102,8 +98,8 @@ namespace MVCMongoDbRouteSystem.Controllers
             {
                 try
                 {
-                    _context.Update(person);
-                    await _context.SaveChangesAsync();
+                    var seachPerson = await SeachApi.SeachPersonIdInApiAsync(id);
+                    SeachApi.UpdatePerson(id, person);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -129,8 +125,7 @@ namespace MVCMongoDbRouteSystem.Controllers
                 return NotFound();
             }
 
-            var person = await _context.Person
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var person = await SeachApi.SeachPersonIdInApiAsync(id);
             if (person == null)
             {
                 return NotFound();
@@ -144,10 +139,9 @@ namespace MVCMongoDbRouteSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var seachPerson = SeachApi.SeachTeamNameInApi(id);
-            var person = await _context.Person.FindAsync(id);
-            _context.Person.Remove(person);
-            await _context.SaveChangesAsync();
+            var seachPerson = await SeachApi.SeachPersonIdInApiAsync(id);
+            SeachApi.RemovePerson(seachPerson.Id);
+            
             return RedirectToAction(nameof(Index));
         }
 
