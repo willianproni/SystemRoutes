@@ -22,6 +22,10 @@ namespace MicroServiceRotas.Controllers
         public ActionResult<List<Person>> GetAll() =>
             _personService.Get();
 
+        [HttpGet("/status")]
+        public ActionResult<List<Person>> GetStatus() =>
+            _personService.GetStatus();
+
         [HttpGet("{id}")]
         public ActionResult<Person> GetId(string id)
         {

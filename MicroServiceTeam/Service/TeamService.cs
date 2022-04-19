@@ -32,7 +32,7 @@ namespace MicroServiceTeam.Service
             {
                 try
                 {
-                    Person verifyPerson = await SeachApi.SeachPersonNameInApiAsync(item.Name);
+                    Person verifyPerson = await SeachApi.SeachPersonIdInApiAsync(item.Id);
                     SeachApi.UpdatePerson(verifyPerson.Id, new Person()
                     {
                         Id = verifyPerson.Id,

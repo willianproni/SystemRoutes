@@ -13,6 +13,7 @@ namespace Model.MongoDb
         [BsonId]
         [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
         public string Id { get; set; }
+        [Display(Name ="Nome")]
         [Required(ErrorMessage ="Digite o nome da pessoa.")]
         public string Name { get; set; }
         public bool Active { get; set; }

@@ -31,7 +31,6 @@ namespace MVCMongoDbRouteSystem.Controllers
         {
             var team = await SeachApi.SeachTeamNameInApi(id);
 
-        ;//.FirstOrDefaultAsync(m => m.Id == nameTeam);
             if (team == null)
             {
                 return NotFound();
@@ -53,12 +52,21 @@ namespace MVCMongoDbRouteSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,NameTeam,City")] Team team)
         {
+            List<Person> teamPersons = new List<Person>();
 
             var cityCheck = Request.Form["city"].FirstOrDefault();
-            var seachCity =  await SeachApi.SeachCityNameInApi(cityCheck);
+            var seachCity = await SeachApi.SeachCityNameInApi(cityCheck);
+            var personCheck = Request.Form["checkPeopleTeam"].ToList();
+
+            foreach (var item in personCheck)
+            {
+                var veridyPeople = SeachApi.SeachPersonIdInApiAsync(item);
+                teamPersons.Add(await veridyPeople);
+            }
 
             if (ModelState.IsValid)
             {
+                team.Persons = teamPersons;
                 team.City = seachCity;
                 SeachApi.PostTeam(team);
                 return RedirectToAction(nameof(Index));
@@ -150,6 +158,21 @@ namespace MVCMongoDbRouteSystem.Controllers
         private bool TeamExists(string id)
         {
             return _context.Team.Any(e => e.Id == id);
+        }
+
+        private static async Task<IEnumerable<Person>> PeopleActive()
+        {
+            var people = await SeachApi.GetAllPeopleInApi();
+
+            List<Person> peopleAvailable = new List<Person>();
+
+            foreach (var item in people)
+            {
+                if (item.Active == true)
+                    peopleAvailable.Add(item);
+            }
+
+            return peopleAvailable;
         }
     }
 }

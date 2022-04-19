@@ -21,6 +21,10 @@ namespace MicroServiceRotas.Service
         public List<Person> Get() =>
             _person.Find(person => true).ToList();
 
+        public List<Person> GetStatus() =>      
+            _person.Find(person => person.Active == true).ToList();
+        
+
         public Person GetId(string id) =>
             _person.Find(person => person.Id == id).FirstOrDefault();
 

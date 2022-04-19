@@ -34,6 +34,23 @@ namespace Services
             }
         }
 
+        public static async Task<List<Person>> GetAllPersonStatusTrue()
+        {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync("https://localhost:44302/status");
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                var personJson = JsonConvert.DeserializeObject<List<Person>>(responseBody);
+                return personJson;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public static async Task<List<Person>> GetAllPeopleInApi()
         {
             try
@@ -114,7 +131,7 @@ namespace Services
         {
             try
             {
-                HttpResponseMessage response = await client.GetAsync("https://localhost:44394/api/City/" + nameCity);
+                HttpResponseMessage response = await client.GetAsync("https://localhost:44394/api/City/cidade/" + nameCity);
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
                 var cityJson = JsonConvert.DeserializeObject<City>(responseBody);
