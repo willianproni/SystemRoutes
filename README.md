@@ -35,13 +35,9 @@
                   <li>
     API do Time
                       <li>
-    MVC de Pessoa (Index, Create)
+    CRUD Pessoa
                    <li>
-    MVC de Cidade (Index, Create)
-                            <li>
-    MVC de Time (Index, Create)
-                          <li>
-    MVC de Documento (button Upload) 
+    CRUD Cidade
   
   <hr>
   
