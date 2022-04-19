@@ -148,8 +148,8 @@ namespace MVCMongoDbRouteSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var team = await SeachApi.SeachTeamIdInApiAsync(id);
-
+            var seachTeam = await SeachApi.SeachTeamIdInApiAsync(id);
+            SeachApi.RemoveTeam(seachTeam.Id);
             return RedirectToAction(nameof(Index));
         }
 

@@ -19,6 +19,9 @@
                 @Html.DisplayNameFor(model => model.Persons)
             </th>
              <th>
+                 Quantidade Pessoas
+            </th>
+             <th>
                 @Html.DisplayNameFor(model => model.City.NameCity)
             </th>
             <th></th>
@@ -35,6 +38,9 @@
 					{
 						<p>@Html.DisplayFor(people => person.Name)</p>
 					}
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.Persons.Count)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.City.NameCity)

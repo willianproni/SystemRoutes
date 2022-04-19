@@ -164,7 +164,7 @@ namespace Services
         {
             try
             {
-                HttpResponseMessage response = await client.GetAsync("https://localhost:44345/api/Team/" + nameTeam);
+                HttpResponseMessage response = await client.GetAsync("https://localhost:44345/api/Team/time/" + nameTeam);
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
                 var teamJson = JsonConvert.DeserializeObject<Team>(responseBody);
@@ -235,9 +235,9 @@ namespace Services
 
         #region GetDelete
 
-        public static void RemoveTeam(string name)
+        public static void RemoveTeam(string id)
         {
-            client.DeleteAsync("https://localhost:44345/api/Team/" + name);
+            client.DeleteAsync("https://localhost:44345/api/Team/" + id);
         }
 
         public static void RemovePerson(string id)
