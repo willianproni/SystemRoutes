@@ -21,7 +21,7 @@ namespace Services
         {
             try
             {
-                HttpResponseMessage response = await client.GetAsync("https://localhost:44394/api/City");
+                HttpResponseMessage response = await client.GetAsync("https://localhost:44365/api/City");
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
                 var cityJson = JsonConvert.DeserializeObject<List<City>>(responseBody);
@@ -110,7 +110,7 @@ namespace Services
         {
             try
             {
-                HttpResponseMessage response = await client.GetAsync("https://localhost:44394/api/City/" + id);
+                HttpResponseMessage response = await client.GetAsync("https://localhost:44365/api/City/" + id);
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
                 var CityJson = JsonConvert.DeserializeObject<City>(responseBody);
@@ -149,7 +149,7 @@ namespace Services
         {
             try
             {
-                HttpResponseMessage response = await client.GetAsync("https://localhost:44394/api/City/cidade/" + nameCity);
+                HttpResponseMessage response = await client.GetAsync("https://localhost:44365/api/City/cidade/" + nameCity);
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
                 var cityJson = JsonConvert.DeserializeObject<City>(responseBody);
@@ -199,7 +199,7 @@ namespace Services
 
         public static void PostCity(City newCity)
         {
-            client.PostAsJsonAsync("https://localhost:44394/api/City", newCity);
+            client.PostAsJsonAsync("https://localhost:44365/api/City", newCity);
         }
 
         public static void PostTeam(Team newTeam)
@@ -228,7 +228,7 @@ namespace Services
 
         public static void UpdateCity(string id, City updateCity)
         {
-            client.PutAsJsonAsync("https://localhost:44394/api/City/" + id, updateCity);
+            client.PutAsJsonAsync("https://localhost:44365/api/City/" + id, updateCity);
         }
 
         public static void UpdateTeamInsert(string id, Person updatePerson)
@@ -257,7 +257,7 @@ namespace Services
 
         public static void RemoveCity(string id)
         {
-            client.DeleteAsync("https://localhost:44394/api/City/" + id);
+            client.DeleteAsync("https://localhost:44365/api/City/" + id);
         }
 
         #endregion

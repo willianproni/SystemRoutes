@@ -3,8 +3,8 @@
 @{
 	ViewData["Title"] = "Index";
 }
-<Br />
-<div class="d-flex justify-content-between" >
+<br />
+<div class="d-flex justify-content-between">
 	<h1 class="d-flex justify-content-center">Todas as Pessoas</h1>
 	<a asp-action="Create" class="btn btn-outline-secondary">Cadastrar</a>
 </div>
@@ -31,15 +31,14 @@
 					@Html.DisplayFor(modelItem => item.Name)
 				</td>
 				<td>
-					            @if(item.Active == true)
-            {
-                <p>Disponível</p>
-                
-            }
-            else
-            {
-                <p>Ocupado</p>
-            }  
+					@if (item.Active == true)
+					{
+						<p>Disponível</p>
+					}
+					else
+					{
+						<p>Indisponível</p>
+					}
 				</td>
 				<td class="d-flex justify-content-around">
 					<a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-warning">Editar</a>

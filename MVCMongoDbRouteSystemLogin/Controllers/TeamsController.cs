@@ -34,7 +34,7 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
                 return NotFound();
             }
 
-            var team = await SeachApi.SeachTeamNameInApi(id);
+            var team = await SeachApi.SeachTeamIdInApiAsync(id);
             if (team == null)
             {
                 return NotFound();

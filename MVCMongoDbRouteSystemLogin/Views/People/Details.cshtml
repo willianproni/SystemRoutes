@@ -1,40 +1,40 @@
 ﻿@model Model.MongoDb.Person
 
 @{
-    ViewData["Title"] = "Details";
+	ViewData["Title"] = "Details";
 }
 <br />
 <h1>Detalhes @Model.Name</h1>
 
 <div>
-    <h4>Informações</h4>
-    <hr />
-    <Br />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            Nome Completo
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            Status
-        </dt>
-        
-        <dd class = "col-sm-10">
-            @if(@Model.Active == true)
-            {
-                <p>Disponível</p>
-                
-            }
-            else
-            {
-                <p>Ocupado</p>
-            }          
-        </dd>
-    </dl>
+	<h4>Informações</h4>
+	<hr />
+	<br />
+	<dl class="row">
+		<dt class="col-sm-2">
+			Nome Completo
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Name)
+		</dd>
+		<dt class="col-sm-2">
+			Status
+		</dt>
+
+		<dd class="col-sm-10">
+			@if (@Model.Active == true)
+			{
+				<p>Disponível</p>
+
+			}
+			else
+			{
+				<p>Ocupado</p>
+			}
+		</dd>
+	</dl>
 </div>
 <hr />
 <div>
-    <a asp-action="Index" class="btn btn-outline-secondary">Retornar</a>
+	<a asp-action="Index" class="btn btn-outline-secondary">Retornar</a>
 </div>

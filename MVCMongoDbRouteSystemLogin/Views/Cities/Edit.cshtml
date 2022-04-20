@@ -3,10 +3,11 @@
 @{
     ViewData["Title"] = "Edit";
 }
+<br />
+<br />
+<h1>Editando Cidade @Model.NameCity</h1>
 
-<h1>Edit</h1>
 
-<h4>City</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,24 +15,25 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="NameCity" class="control-label"></label>
-                <input asp-for="NameCity" class="form-control" />
+                <label>Cidade</label><br /><br />
+                <input asp-for="NameCity" class="form-control border border-secondary" />
                 <span asp-validation-for="NameCity" class="text-danger"></span>
-            </div>
+            </div><br />
             <div class="form-group">
-                <label asp-for="State" class="control-label"></label>
-                <input asp-for="State" class="form-control" />
+                <label>Estado</label><br /><br />
+                <input asp-for="State" class="form-control border border-secondary" />
                 <span asp-validation-for="State" class="text-danger"></span>
-            </div>
+            </div><br />
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Salvar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
-
+<br />
+<hr />
 <div>
-    <a asp-action="Index">Back to List</a>
+     <a asp-action="Index" class="btn btn-outline-secondary">Retornar</a>
 </div>
 
 @section Scripts {
