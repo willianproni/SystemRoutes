@@ -57,15 +57,37 @@ namespace MicroServiceTeam.Controllers
             return CreatedAtRoute("GetTeam", new { time = newTeam.NameTeam }, newTeam);
         }
 
-        [HttpPut("{time}")]
-        public IActionResult Update(string time, Team updateTime)
+        [HttpPut("{id}")]
+        public IActionResult Update(string id, Team updateTime)
         {
-            var seachTeam = _teamService.Get(time);
+            var seachTeam = _teamService.GetId(id);
 
             if (seachTeam == null)
                 return Conflict("Time não cadastrado, verifique as informações e tente novamento!");
 
-            _teamService.Update(time, updateTime);
+            _teamService.Update(id, updateTime);
+
+            return NoContent();
+        }
+
+        [HttpPut("insert/{id}")]
+        public async Task<dynamic> UpdateInsert(string id, Person person)
+        {
+            var team = await _teamService.UpdateInsert(id, person);
+
+            if (team == null)
+                return BadRequest("Time não cadastrado, verifique as informações e tente novamento!");
+
+            return NoContent();
+        }
+
+        [HttpPut("remove/{id}")]
+        public async Task<dynamic> UpdateRemove(string id, Person person)
+        {
+            var team = await _teamService.UpdateRemove(id, person);
+
+            if (team == null)
+                return BadRequest("Time não cadastrado, verifique as informações e tente novamento!");
 
             return NoContent();
         }

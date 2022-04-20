@@ -42,9 +42,8 @@ namespace MicroServiceTeam.Service
                         Name = verifyPerson.Name,
                         Active = false
                     });
-                    verifyPerson.Active = !verifyPerson.Active;
+                    verifyPerson.Active = false;
                     personList.Add(verifyPerson);
-
                 }
                 catch (System.Exception)
                 {
@@ -60,8 +59,50 @@ namespace MicroServiceTeam.Service
             return newTeam;
         }
 
-        public void Update(string nameTeam, Team updateTeam) =>
-            _team.ReplaceOne(team => team.NameTeam == nameTeam, updateTeam);
+        public void Update(string id, Team updateTeam) =>
+            _team.ReplaceOne(team => team.Id == id, updateTeam);
+
+        public async Task<Team> UpdateInsert(string id, Person updatePerson)
+        {
+            var seachTeam = await SeachApi.SeachTeamIdInApiAsync(id);
+
+            var seachPerson = await SeachApi.SeachPersonIdInApiAsync(updatePerson.Id);
+
+            if (seachTeam == null)
+                return null;
+
+            seachPerson.Active = false;
+
+            var filter = Builders<Team>.Filter.Where(team => team.Id == id);
+            var update = Builders<Team>.Update.Push("Persons", seachPerson);
+
+            await SeachApi.UpdatePersonActive(seachPerson.Id);
+
+            await _team.UpdateOneAsync(filter, update);
+
+            return seachTeam;
+        }
+
+        public async Task<Team> UpdateRemove(string id, Person updatePerson)
+        {
+            var seachTeam = await SeachApi.SeachTeamIdInApiAsync(id);
+
+            var seachPerson = await SeachApi.SeachPersonIdInApiAsync(updatePerson.Id);
+
+            if (seachTeam == null)
+                return null;
+
+            var filter = Builders<Team>.Filter.Where(team => team.Id == id);
+            var update = Builders<Team>.Update.Pull("Persons", seachPerson);
+
+            await SeachApi.UpdatePersonActive(seachPerson.Id);
+
+            await _team.UpdateOneAsync(filter, update);
+
+            return seachTeam;
+        }
+
+
 
         public async void Remove(string id)
         {

@@ -231,6 +231,16 @@ namespace Services
             client.PutAsJsonAsync("https://localhost:44394/api/City/" + id, updateCity);
         }
 
+        public static void UpdateTeamInsert(string id, Person updatePerson)
+        {
+            client.PutAsJsonAsync("https://localhost:44345/api/Team/insert/" + id, updatePerson);
+        }
+
+        public static void UpdateTeamRemove(string id, Person updatePerson)
+        {
+            client.PutAsJsonAsync("https://localhost:44345/api/Team/remove/" + id, updatePerson);
+        }
+
         #endregion
 
         #region GetDelete
@@ -251,6 +261,11 @@ namespace Services
         }
 
         #endregion
+
+        public static async Task UpdatePersonActive(string id)
+        {
+           var response = await client.PutAsync($"https://localhost:44302/api/Person/status/" + id, null);
+        }
 
     }
 }

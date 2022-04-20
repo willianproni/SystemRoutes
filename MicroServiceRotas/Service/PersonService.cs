@@ -21,9 +21,9 @@ namespace MicroServiceRotas.Service
         public List<Person> Get() =>
             _person.Find(person => true).ToList();
 
-        public List<Person> GetStatus() =>      
+        public List<Person> GetStatus() =>
             _person.Find(person => person.Active == true).ToList();
-        
+
 
         public Person GetId(string id) =>
             _person.Find(person => person.Id == id).FirstOrDefault();
@@ -36,9 +36,22 @@ namespace MicroServiceRotas.Service
             _person.InsertOne(newPerson);
             return newPerson;
         }
-            
+
         public void Update(string id, Person updatePerson) =>
             _person.ReplaceOne(person => person.Id == id, updatePerson);
+
+        public Person UpdateActive(string id)
+        {
+            var seachPerson = GetId(id);
+
+            if (seachPerson == null)
+                return null;
+
+            seachPerson.Active = !seachPerson.Active;
+
+            _person.ReplaceOneAsync<Person>(person => person.Id == id, seachPerson);
+            return seachPerson;
+        }
 
         public void Remove(string id) =>
             _person.DeleteOne(person => person.Id == id);

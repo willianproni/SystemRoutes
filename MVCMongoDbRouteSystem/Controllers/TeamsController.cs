@@ -82,13 +82,27 @@ namespace MVCMongoDbRouteSystem.Controllers
                 return NotFound();
             }
 
-            var seachCity = await SeachApi.SeachTeamNameInApi(id);
+            var seachCity = await SeachApi.SeachTeamIdInApiAsync(id);
 
-            if (id == null)
+            var seachPeple = await SeachApi.GetAllPersonStatusTrue();
+
+            var SeachTeam = await SeachApi.SeachTeamIdInApiAsync(id);
+
+            List<Person> person = new List<Person>();
+
+            foreach (var personTeam in SeachTeam.Persons)
+            {
+                person.Add(personTeam);
+            }
+
+            ViewBag.PersonTeam = person;
+
+            if (seachCity == null)
             {
                 return NotFound();
             }
-            return View(id);
+
+            return View(seachCity);
         }
 
         // POST: Teams/Edit/5
@@ -107,8 +121,31 @@ namespace MVCMongoDbRouteSystem.Controllers
             {
                 try
                 {
-                    _context.Update(team);
-                    await _context.SaveChangesAsync();
+                    var personAdd = Request.Form["checkPeopleJoinTeam"].ToList();
+                    var personRemove = Request.Form["checkPeopleRemoveTeam"].ToList();
+
+                    if(personAdd.Count != 0)
+                    {
+                        foreach (var persons in personAdd)
+                        {
+                            var seachPerson = await SeachApi.SeachPersonIdInApiAsync(persons);
+
+                            SeachApi.UpdateTeamInsert(id, seachPerson);
+                        }
+                    }
+
+                    if (personRemove.Count != 0)
+                    {
+                        foreach (var persons in personRemove)
+                        {
+                            var seachPerson = await SeachApi.SeachPersonIdInApiAsync(persons);
+
+                            SeachApi.UpdateTeamRemove(id, seachPerson);
+                        }
+                    }
+
+                   /* _context.Update(team);
+                    await _context.SaveChangesAsync();*/
                 }
                 catch (DbUpdateConcurrencyException)
                 {

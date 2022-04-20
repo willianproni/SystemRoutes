@@ -37,7 +37,7 @@ namespace MicroServiceRotas.Controllers
             return seachPerson;
         }
 
-        [HttpGet("nome/{nome}", Name ="GetPerson")]
+        [HttpGet("nome/{nome}", Name = "GetPerson")]
         public ActionResult<Person> GetName(string nome)
         {
             var seachPerson = _personService.GetName(nome);
@@ -65,6 +65,17 @@ namespace MicroServiceRotas.Controllers
                 return BadRequest("Pessoa não encontrado, confira os dados e tente novamente!");
 
             _personService.Update(id, updatePerson);
+
+            return NoContent();
+        }
+
+        [HttpPut("status/{id}")]
+        public IActionResult UpdateActive(string id)
+        {
+            var seachPerson = _personService.UpdateActive(id);
+
+            if (seachPerson == null)
+                return BadRequest("Pessoa não encontrado, confira os dados e tente novamente!");
 
             return NoContent();
         }
