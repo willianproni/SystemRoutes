@@ -1,4 +1,5 @@
-﻿@model Model.MongoDb.Team
+﻿@using Model
+@model Model.MongoDb.Team
 
 @{
 	ViewData["Title"] = "Edit";
@@ -18,6 +19,14 @@
 				<input asp-for="NameTeam" class="form-control" />
 				<span asp-validation-for="NameTeam" class="text-danger"></span>
 			</div>
+			<label>Cidade</label><br />
+			<select asp-for="City" id="City">
+                @foreach (City city in await Services.SeachApi.GetAllCityInApi())
+                {
+					<option value="@city.NameCity"> @city.NameCity </option>
+				}
+			</select>
+			<hr />
 			<div class="form-group">
 				<label asp-for="Persons" class="control-label">Pessoas Disponíveis:</label><br />
 				@foreach (var person in await Services.SeachApi.GetAllPersonStatusTrue())
@@ -28,6 +37,8 @@
 
 					<br />
 				}
+			<hr />
+
 				<label asp-for="Persons" class="control-label">Pessoas da Equipe: </label><br />
 				@foreach (var person in ViewBag.PersonTeam)
 				{
@@ -38,6 +49,7 @@
 					<br />
 				}
 			</div>
+			<hr />
 			<div class="form-group">
 				<input type="submit" value="Save" class="btn btn-primary" />
 			</div>
