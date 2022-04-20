@@ -5,28 +5,28 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using MVCMongoDbRouteSystem.Data;
-using Model.MongoDb;
+using MVCMongoDbRouteSystemLogin.Data;
+using Model;
 using Services;
 
-namespace MVCMongoDbRouteSystem.Controllers
+namespace MVCMongoDbRouteSystemLogin.Controllers
 {
-    public class PeopleController : Controller
+    public class CitiesController : Controller
     {
-        private readonly MVCMongoDbRouteSystemContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public PeopleController(MVCMongoDbRouteSystemContext context)
+        public CitiesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: People
+        // GET: Cities
         public async Task<IActionResult> Index()
         {
-            return View(await SeachApi.GetAllPeopleInApi());
+            return View(await SeachApi.GetAllCityInApi());
         }
 
-        // GET: People/Details/5
+        // GET: Cities/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -34,38 +34,37 @@ namespace MVCMongoDbRouteSystem.Controllers
                 return NotFound();
             }
 
-            var person = await SeachApi.SeachPersonIdInApiAsync(id);
-            if (person == null)
+            var seachCity = await SeachApi.SeachCityIdInApiAsync(id);
+            if (seachCity == null)
             {
                 return NotFound();
             }
 
-            return View(person);
+            return View(seachCity);
         }
 
-        // GET: People/Create
+        // GET: Cities/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: People/Create
+        // POST: Cities/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,Name,Team")] Person person)
+        public  IActionResult Create([Bind("Id,NameCity,State")] City city)
         {
             if (ModelState.IsValid)
             {
-                person.Active = !person.Active;
-                SeachApi.PostPerson(person);
+                SeachApi.PostCity(city);
                 return RedirectToAction(nameof(Index));
             }
-            return View(person);
+            return View(city);
         }
 
-        // GET: People/Edit/5
+        // GET: Cities/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -73,22 +72,22 @@ namespace MVCMongoDbRouteSystem.Controllers
                 return NotFound();
             }
 
-            var person = await SeachApi.SeachPersonIdInApiAsync(id);
-            if (person == null)
+            var seachCity = await SeachApi.SeachCityIdInApiAsync(id);
+            if (seachCity == null)
             {
                 return NotFound();
             }
-            return View(person);
+            return View(seachCity);
         }
 
-        // POST: People/Edit/5
+        // POST: Cities/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Name")] Person person)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,NameCity,State")] City city)
         {
-            if (id != person.Id)
+            if (id != city.Id)
             {
                 return NotFound();
             }
@@ -97,12 +96,12 @@ namespace MVCMongoDbRouteSystem.Controllers
             {
                 try
                 {
-                    var seachPerson = await SeachApi.SeachPersonIdInApiAsync(id);
-                    SeachApi.UpdatePerson(id, person);
+                    var seachCity = await SeachApi.SeachCityIdInApiAsync(id);
+                    SeachApi.UpdateCity(id, city);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PersonExists(person.Id))
+                    if (!CityExists(city.Id))
                     {
                         return NotFound();
                     }
@@ -113,10 +112,10 @@ namespace MVCMongoDbRouteSystem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(person);
+            return View(city);
         }
 
-        // GET: People/Delete/5
+        // GET: Cities/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -124,28 +123,28 @@ namespace MVCMongoDbRouteSystem.Controllers
                 return NotFound();
             }
 
-            var person = await SeachApi.SeachPersonIdInApiAsync(id);
-            if (person == null)
+            var seachCity = await SeachApi.SeachCityIdInApiAsync(id);
+            if (seachCity == null)
             {
                 return NotFound();
             }
 
-            return View(person);
+            return View(seachCity);
         }
 
-        // POST: People/Delete/5
+        // POST: Cities/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var seachPerson = await SeachApi.SeachPersonIdInApiAsync(id);
-            SeachApi.RemovePerson(seachPerson.Id);
+            var seachCity = await SeachApi.SeachCityIdInApiAsync(id);
+            SeachApi.RemoveCity(id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PersonExists(string id)
+        private bool CityExists(string id)
         {
-            return _context.Person.Any(e => e.Id == id);
+            return _context.City.Any(e => e.Id == id);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Services
 {
     public class ReadFileExcel
     {
-        public static List<Route> ReadXls(IFormFile excel)
+        public static List<Route> ReadXls(IFormFile path)
         {
             var response = new List<Route>();
 
@@ -23,7 +23,7 @@ namespace Services
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
-            using (ExcelPackage package = new ExcelPackage((Stream)excel))
+            using (ExcelPackage package = new ExcelPackage((Stream)path))
             {
                 ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
 

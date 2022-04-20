@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Model.MongoDb.Team>
+
+@{
+    ViewData["Title"] = "Times";
+}
+
+<h1>Times</h1>
+
+<p>
+    <a asp-action="Create">Criar Novo Time</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NameTeam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Persons)
+            </th>
+             <th>
+                 Quantidade Pessoas
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.City.NameCity)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameTeam)
+            </td>
+            <td>
+                @foreach (var person in @item.Persons)
+					{
+						<p>@Html.DisplayFor(people => person.Name)</p>
+					}
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.Persons.Count)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City.NameCity)
+            </td>
+             
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.NameTeam">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Remover</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
