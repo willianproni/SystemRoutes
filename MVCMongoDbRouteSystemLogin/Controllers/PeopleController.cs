@@ -5,17 +5,17 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using MVCMongoDbRouteSystem.Data;
+using MVCMongoDbRouteSystemLogin.Data;
 using Model.MongoDb;
 using Services;
 
-namespace MVCMongoDbRouteSystem.Controllers
+namespace MVCMongoDbRouteSystemLogin.Controllers
 {
     public class PeopleController : Controller
     {
-        private readonly MVCMongoDbRouteSystemContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public PeopleController(MVCMongoDbRouteSystemContext context)
+        public PeopleController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -54,7 +54,7 @@ namespace MVCMongoDbRouteSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,Name,Team")] Person person)
+        public IActionResult Create([Bind("Id,Name,Active")] Person person)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace MVCMongoDbRouteSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Name")] Person person)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Active")] Person person)
         {
             if (id != person.Id)
             {

@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Servic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVCMongoDbRouteSystem", "MVCMongoDbRouteSystem\MVCMongoDbRouteSystem.csproj", "{9B5AEF79-1046-4298-BB92-B94377554B40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroServiceUser", "MicroServiceUser\MicroServiceUser.csproj", "{81BCF4D5-D5AC-4EC0-AC9E-FB9F27345B72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroServiceUser", "MicroServiceUser\MicroServiceUser.csproj", "{81BCF4D5-D5AC-4EC0-AC9E-FB9F27345B72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCMongoDbRouteSystemLogin", "MVCMongoDbRouteSystemLogin\MVCMongoDbRouteSystemLogin.csproj", "{3829C440-006B-4106-B2A1-F9DA3F544EE3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{81BCF4D5-D5AC-4EC0-AC9E-FB9F27345B72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81BCF4D5-D5AC-4EC0-AC9E-FB9F27345B72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81BCF4D5-D5AC-4EC0-AC9E-FB9F27345B72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3829C440-006B-4106-B2A1-F9DA3F544EE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3829C440-006B-4106-B2A1-F9DA3F544EE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3829C440-006B-4106-B2A1-F9DA3F544EE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3829C440-006B-4106-B2A1-F9DA3F544EE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

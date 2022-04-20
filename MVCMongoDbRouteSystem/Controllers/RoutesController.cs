@@ -22,7 +22,7 @@ namespace MVCMongoDbRouteSystem.Controllers
         }
 
         // GET: Routes
-        public async Task<IActionResult> Index(FormFile excel)
+        public async Task<IActionResult> Index(IFormFile excel)
         {
             return View( ReadFileExcel.ReadXls(excel).OrderBy(rotas => rotas.Cep));
         }
