@@ -65,5 +65,41 @@ namespace Services
             }
             return response;
         }
+
+        public object ReadFileXls(IFormFile FileXls)
+        {
+            List<string> list = new();
+            int cepColumn = 0;
+            IDictionary<string, List<String>> routes = new Dictionary<string, List<String>>();
+
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            using (ExcelPackage package = new(FileXls.OpenReadStream()))
+            {
+                ExcelWorksheet workbook = package.Workbook.Worksheets[0];
+                int totalColumns = workbook.Dimension.End.Column;
+                int totalrows = workbook.Dimension.End.Row;
+
+                for (int row = 1; row < totalrows; row++)
+                {
+                    list = new List<string>();
+                    for (int colums = 0; colums < totalColumns; colums++)
+                    {
+                        var conteudo = workbook.Cells[row, colums].Value == null ? "" : workbook.Cells[row, colums].Value;
+                        if (conteudo == null && colums == totalColumns - 1)
+                            break;
+
+                        if (conteudo.ToString().ToUpper() == "CEP")
+                            cepColumn = colums;
+                        list.Add(conteudo.ToString());
+                    }
+                    if (workbook.Cells[row, cepColumn].Value == null || workbook.Cells[row, cepColumn].Value.ToString() == "")
+                        break;
+
+                    routes.Add(workbook.Cells[row, cepColumn].Value.ToString(), list);
+                }
+                var value = routes.OrderBy(Values => Values.Key).ToDictionary(values => values.Key, values => values.Key);
+                return value;
+            }
+        }
     }
 }
