@@ -10,48 +10,45 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
 {
     public class RouteController : Controller
     {
-        public IActionResult Index(IFormFile file)
-        {
+        public static List<string> routes = new();
+        public static readonly List<string> headers = new();
+        public static string service;
+        public static string city;
 
-            var retorno = ReadFileExcel.ReadFile(file);
-
-            ViewBag.retornoReadFile = retorno;
-
-            return View();
-        }
-
-        /*public IActionResult Create()
+        public IActionResult Index()
         {
             return View();
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NameTeam")] Team team)
+        public IActionResult TeamOperationCity()
         {
-            List<Person> teamPersons = new List<Person>();
+            service = Request.Form["serviceName"].ToString();
+            city = Request.Form["cityName"].ToString();
 
-            var cityCheck = Request.Form["city"].FirstOrDefault();
-            var seachCity = await SeachApi.SeachCityNameInApi(cityCheck);
-            var personCheck = Request.Form["checkPeopleTeam"].ToList();
+            return RedirectToAction(nameof(SelectHeader));
+        }
 
-            if (personCheck.Count != 0)
-            {
-                foreach (var item in personCheck)
-                {
-                    var veridyPeople = SeachApi.SeachPersonIdInApiAsync(item);
-                    teamPersons.Add(await veridyPeople);
-                }
-            }
-            else
-            {
-                return BadRequest(new { message = "A equipe precisa de pelo menos 1 integrante" });
-            }
+        public async Task<IActionResult> SelectHeader()
+        {
+            var teams = await SeachApi.SeachTeamCityIdInApiAsync(city);      
 
-            team.Persons = teamPersons;
-            team.City = seachCity;
-            SeachApi.PostTeam(team);
-            return RedirectToAction(nameof(Index));
-        }*/
+            ViewBag.TeamsAvailable = teams;
+
+            ViewBag.retornoReadFile = routes;
+            return View();
+        }
+
+        public async Task<IActionResult> SelectServiceAndCity(IFormFile file)
+        {
+            var localizarcity = SeachApi.GetAllCityInApi();
+            ViewBag.AllCity = await localizarcity;
+
+            var retorno = ReadFileExcel.ReadFile(file);
+            routes = retorno;
+            
+
+            return View();
+        }
     }
 }

@@ -27,6 +27,9 @@ namespace MicroServiceTeam.Service
         public Team Get(string nameTeam) =>
             _team.Find<Team>(team => team.NameTeam == nameTeam).FirstOrDefault();
 
+        public List<Team> GetTeamCity(string city) =>
+            _team.Find(team => team.City.Id == city).ToList();
+
         public async Task<Team> Create(Team newTeam)
         {
             var personList = new List<Person>();

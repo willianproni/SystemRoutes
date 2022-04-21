@@ -22,6 +22,11 @@ namespace MicroServiceTeam.Controllers
         public ActionResult<List<Team>> GetAll() =>
             _teamService.Get();
 
+        [HttpGet("cidade/team/{cidade}", Name = "GetTeamCity")]
+        public ActionResult<List<Team>> GetTeamCity(string cidade) =>
+            _teamService.GetTeamCity(cidade);
+        
+
         [HttpGet("{id}")]
         public ActionResult<Team> GetIdTeam(string id)
         {

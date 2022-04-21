@@ -4,69 +4,9 @@
 @{
 	ViewData["Title"] = "Index";
 
-	string[] @servicos = new string[]{
-						"INSTALAÇÃO",
-						"MUDANÇA DE ENDEREÇO",
-						"MUDANÇA DE LOCAL",
-						"REFAZER MANUTENÇÃO",
-						"REINSTALAÇÃO",
-						"RETORNO CREDENCIADA",
-						"SEM SINAL",
-						"TROCA DE TERMINAL",
-						"VISITA TECNICA"};
 }
 
-<br />
-<h1 class="text-center">Criação de Rotas</h1>
-
-<label>Serviço</label>
-<br />
-<select id="service" class="form-select">
-	<option> SELECIONE O SERVIÇO </option>
-	@foreach (var item in @servicos)
-	{
-		<option>@item</option>
-	}
-</select>
-<br />
-<br />
-<label>Cidade</label>
-<br />
-<select id="city" class="form-select">
-	<option> SELECIONE A CIDADE </option>
-	@foreach (City city in await SeachApi.GetAllCityInApi())
-	{
-		<option value="@city.NameCity"> @city.NameCity </option>
-	}
-</select>
-<br />
-<br />
-<label>Time</label>
-<br />
-<select id="team" class="form-select">
-	<option> SELECIONE A CIDADE </option>
-	@foreach (Team team in await SeachApi.GetAllTeamInApi())
-	{
-		<option value="@team.NameTeam"> @team.NameTeam</option>
-	}
-</select>
-<br />
-<br />
-@foreach (var person in ViewBag.retornoReadFile)
-{
-	<input name="checkPeopleRemoveTeam" type="checkbox" value=@person>
-
-	<label for="@person"> @person</label>
-
-	<br />
-}
-<hr />
-
-
-
-<div>
-	<a asp-action="Create" class="btn btn-outline-secondary">Gerar Documento</a>
-</div>
+<h1>Oi</h1>
 
 <script type="text/javascript">
 

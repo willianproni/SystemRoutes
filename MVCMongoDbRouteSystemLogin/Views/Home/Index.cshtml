@@ -3,7 +3,7 @@
 }
 
 <h2>UploadFile</h2>
-@using(Html.BeginForm("Index","route", FormMethod.Post, new { enctype="multipart/form-data"}))
+@using(Html.BeginForm("SelectServiceAndCity","route", FormMethod.Post, new { enctype="multipart/form-data"}))
 {
     <div>
         @Html.TextBox("file", "", new {  type= "file"}) <br />
