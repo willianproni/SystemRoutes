@@ -72,7 +72,7 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(Index));
+               return BadRequest(new { message = "A equipe precisa de pelo menos 1 integrante" });
             }
 
             team.Persons = teamPersons;

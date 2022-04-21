@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ReadFileFolder\**" />
+    <EmbeddedResource Remove="ReadFileFolder\**" />
+    <None Remove="ReadFileFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.95.4" />
     <PackageReference Include="EPPlus" Version="6.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.15" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
@@ -12,10 +19,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ReadFileFolder\" />
   </ItemGroup>
 
 </Project>

@@ -1,15 +1,25 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+	ViewData["Title"] = "Home Page";
+}
+
+<h2>UploadFile</h2>
+@using(Html.BeginForm("Index","route", FormMethod.Post, new { enctype="multipart/form-data"}))
+{
+    <div>
+        @Html.TextBox("file", "", new {  type= "file"}) <br />
+        <input type="submit" value="Upload" class="btn btn-dark" />
+        @ViewBag.Message
+    </div>
 }
 
 <div class="text-center">
-    <h1 class="display-4">Upload</h1>
-        <div class="form-group">
-      <label for="formFile" class="form-label mt-4">Escolha o Arquivo .xlsx</label>
-      <input class="form-control" type="file" id="formFile">
-    </div>
-    <hr />
-
-    <button type="button" class="btn btn-dark">Enviar</button>
-
+	<h1 class="display-4">Upload</h1>
+	<form method="post"  enctype="multipart/form-data" asp-controller="Route" asp-action="Index">
+		<div class="form-group">
+			<label for="formFile" class="form-label mt-4">Escolha o Arquivo .xlsx</label>
+			<input class="form-control" type="file" id="formFile" multiple />
+		</div>
+		<hr />
+		<button type="submit" class="btn btn-dark">Enviar</button>
+	</form>
 </div>
