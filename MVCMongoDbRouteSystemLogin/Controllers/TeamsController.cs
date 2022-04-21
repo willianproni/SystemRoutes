@@ -62,20 +62,25 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
             var seachCity = await SeachApi.SeachCityNameInApi(cityCheck);
             var personCheck = Request.Form["checkPeopleTeam"].ToList();
 
-            foreach (var item in personCheck)
+            if (personCheck.Count != 0)
             {
-                var veridyPeople = SeachApi.SeachPersonIdInApiAsync(item);
-                teamPersons.Add(await veridyPeople);
+                foreach (var item in personCheck)
+                {
+                    var veridyPeople = SeachApi.SeachPersonIdInApiAsync(item);
+                    teamPersons.Add(await veridyPeople);
+                }
             }
-
-            if (ModelState.IsValid)
+            else
             {
-                team.Persons = teamPersons;
-                team.City = seachCity;
-                SeachApi.PostTeam(team);
                 return RedirectToAction(nameof(Index));
             }
-            return View(team);
+
+            team.Persons = teamPersons;
+            team.City = seachCity;
+            SeachApi.PostTeam(team);
+            return RedirectToAction(nameof(Index));
+
+
         }
 
         // GET: Teams/Edit/5
@@ -127,6 +132,9 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
                 {
                     var personAdd = Request.Form["checkPeopleJoinTeam"].ToList();
                     var personRemove = Request.Form["checkPeopleRemoveTeam"].ToList();
+                    var newCity = Request.Form["City"].FirstOrDefault();
+
+                    var tradeCity = await SeachApi.SeachCityNameInApi(newCity);
 
                     if (personAdd.Count != 0)
                     {
@@ -147,6 +155,11 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
                             SeachApi.UpdateTeamRemove(id, seachPerson);
                         }
                     }
+
+                    var seachTeam = await SeachApi.SeachTeamIdInApiAsync(id);
+
+                    seachTeam.City = tradeCity;
+                    SeachApi.UpdateTeam(id, seachTeam);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
