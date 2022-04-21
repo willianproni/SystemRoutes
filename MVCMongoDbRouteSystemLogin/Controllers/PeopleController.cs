@@ -98,6 +98,7 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
                 try
                 {
                     var seachPerson = await SeachApi.SeachPersonIdInApiAsync(id);
+                    person.Active = seachPerson.Active;
                     SeachApi.UpdatePerson(id, person);
                 }
                 catch (DbUpdateConcurrencyException)
