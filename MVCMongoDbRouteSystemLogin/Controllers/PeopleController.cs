@@ -21,12 +21,14 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
         }
 
         // GET: People
+     
         public async Task<IActionResult> Index()
         {
             return View(await SeachApi.GetAllPeopleInApi());
         }
 
         // GET: People/Details/5
+    
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -44,6 +46,7 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
         }
 
         // GET: People/Create
+       
         public IActionResult Create()
         {
             return View();
@@ -53,7 +56,7 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+
         public IActionResult Create([Bind("Id,Name,Active")] Person person)
         {
             if (ModelState.IsValid)
@@ -66,6 +69,7 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
         }
 
         // GET: People/Edit/5
+   
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -85,7 +89,7 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+ 
         public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Active")] Person person)
         {
             if (id != person.Id)

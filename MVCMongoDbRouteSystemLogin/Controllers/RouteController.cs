@@ -13,9 +13,9 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
     {
         public static List<List<string>> routes = new();
         public static List<string> headers = new();
+        public static List<string> serviceList = new();
         public static string service;
         public static string city;
-        public static IFormFile fileReceived;
 
         public IActionResult Index()
         {
@@ -25,14 +25,16 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
         [HttpPost]
         public IActionResult TeamOperationCity(IFormFile file)
         {
-            service = Request.Form["serviceName"].ToString();
+            //service = Request.Form["serviceName"].ToString();
             //city = Request.Form["cityName"].ToString();
 
             int cepColumn = 0;
             int serviceColumn = 0;
             bool check = false;
             List<string> header = new();
+            List<string> listService = new();
             List<List<string>> content = new();
+
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             using ExcelPackage fileexcel = new(file.OpenReadStream());
@@ -52,6 +54,16 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
                     serviceColumn = column;
             }
 
+            for (int row = 2; row < totalRow; row++)
+            {
+                for (int line = serviceColumn; line <= serviceColumn; line++)
+                {
+                    if (worksheet.Cells[row, serviceColumn].Value?.ToString() != null)
+                        listService.Add(worksheet.Cells[row, serviceColumn].Value?.ToString() ?? null);
+
+                }
+            }
+
             worksheet.Cells[2, 1, totalRow, totalColumn].Sort(cepColumn, false);
 
             for (int rows = 2; rows < totalRow; rows++)
@@ -60,7 +72,7 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
                 check = false;
                 for (int columns = 1; columns < totalColumn; columns++)
                 {
-                    if (worksheet.Cells[rows, serviceColumn].Value?.ToString().ToUpper() == service)
+                    if (worksheet.Cells[rows, columns].Value?.ToString() != null)
                     {
                         var conteudo = worksheet.Cells[rows, columns].Value?.ToString() ?? "";
                         contentLine.Add(conteudo);
@@ -73,6 +85,7 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
 
             headers = header;
             routes = content;
+            serviceList = listService;
 
 
 
@@ -83,7 +96,7 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
         {
             var localizarcity = SeachApi.GetAllCityInApi();
             ViewBag.AllCity = await localizarcity;
-          
+            ViewBag.AllService = serviceList;
             return View();
         }
 
@@ -91,9 +104,9 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
         {
             city = Request.Form["cityName"].ToString();
 
-            var teams = await SeachApi.SeachTeamCityIdInApiAsync(city);
+            var team = SeachApi.SeachTeamCityIdInApiAsync(city);
 
-            ViewBag.TeamsAvailable = teams;
+            ViewBag.TeamCity = await team;
 
             ViewBag.retornoReadFile = headers;
             return View();

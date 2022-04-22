@@ -1,7 +1,7 @@
 ﻿@{
 	ViewData["Title"] = "Home Page";
 
-		string[] @servicos = new string[]{
+	string[] @servicos = new string[]{
 						"INSTALAÇÃO",
 						"MUDANÇA DE ENDEREÇO",
 						"MUDANÇA DE LOCAL",
@@ -14,30 +14,29 @@
 						"VISITA TECNICA"};
 }
 
-<h2>UploadFile</h2>
 @using (Html.BeginForm("TeamOperationCity", "route", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-	<div>
-		<div class="form-group">
-			<label class="control-label">Serviços</label> <br /> <br />
-			<select asp-items="@(new SelectList(servicos, @servicos))" class="form-control" name="serviceName" id="serviceName">
-				<option value="default">SERVIÇOS...</option>
-			</select>
-		</div>
-		@Html.TextBox("file", "", new {  type= "file"}) <br />
-		<input type="submit" value="Upload" class="btn btn-dark" />
+	<div class="text-center">
+		<br>
+
+		<h1 class="display-4 text-center">Upload</h1>
+		<br>
+		<label for="formFile" class="form-label mt-4">Escolha o Arquivo .xlsx</label>
+
+		<input class="form-control border border-secondary" type="file" id="formFile" name="file" multiple onchange="getFile()"/>
+
+		@*@Html.TextBox("file", "", new {  type= "file"})*@ <br />
+		<input type="submit" value="Upload" class="btn btn-dark d-flex justify-content-center" id="btnNext" disabled/>
 		@ViewBag.Message
 	</div>
 }
+<script type="text/javascript">
 
-<div class="text-center">
-	<h1 class="display-4">Upload</h1>
-	<form method="post" enctype="multipart/form-data" asp-controller="Route" asp-action="Index">
-		<div class="form-group">
-			<label for="formFile" class="form-label mt-4">Escolha o Arquivo .xlsx</label>
-			<input class="form-control" type="file" id="formFile" multiple />
-		</div>
-		<hr />
-		<button type="submit" class="btn btn-dark">Enviar</button>
-	</form>
-</div>
+	getFile = () => {
+		let FileSelected = document.querySelector('#formFile').value;
+
+		if(FileSelected != "default")
+			document.querySelector("#btnNext").disabled = false;
+		}
+
+</script>

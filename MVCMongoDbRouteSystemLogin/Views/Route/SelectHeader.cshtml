@@ -1,35 +1,40 @@
-﻿@{
+﻿@using Model.MongoDb
+@{
 	ViewData["Title"] = "SelectHeader";
 }
 <br />
-<form asp-action="">
-	<div class="d-flex justify-content-between">
-		<h1 class="d-flex justify-content-center">Geração de documento</h1>
-		<input type="submit" value="Gerar DOC" class="btn btn-outline-secondary" id="btnNext" />
-	</div>
-	<div class="row">
-		<div class="col-md-4">
+<div class="row">
+	<div class="form-control">
 
-			<div class="form-group">
-				<label class="control-label">Times</label> <br /><br />
-				<select asp-items="@(new SelectList(ViewBag.TeamsAvailable,"Id", "NameTeam"))" class="form-control" name="cityName" id="cityName">
-					<option value="default">Times...</option>
-				</select>
-			</div>
-			<br />
-			<hr />
-			<div class="form-group">
-				@foreach (var person in ViewBag.retornoReadFile)
-				{
-					<input name="checkPeopleRemoveTeam" type="checkbox" value=@person>
-
-					<label for="@person"> @person</label>
-
-					<br />
-				}
-			</div>
-			<br />
+		<div class="d-flex justify-content-between">
+			<h1 class="d-flex justify-content-center">Geração de documento</h1>
+			<input type="submit" value="Gerar DOC" class="btn btn-outline-secondary" id="btnNext" />
 		</div>
+		<form>
+			<div class="col-md-4">
+				<div class="form-group">
+					<label>Times</label><br />
+					@foreach (var team in ViewBag.TeamCity)
+					{
+						<input name="checkTeamService" type="checkbox" value=@team.Id id="TeamCity">
+						<label for="@team.NameTeam"> @team.NameTeam</label>
+						<br />
+					}
+				</div>
+				<br />
+				<hr />
+				<div class="form-group">
+					@foreach (var header in ViewBag.retornoReadFile)
+					{
+						<input name="checkPeopleRemoveTeam" type="checkbox" value=@header>
+						<label for="@header"> @header</label>
+						<br />
+					}
+				</div>
+				<br />
+			</div>
+		</form>
 	</div>
-</form>
+</div>
+
 

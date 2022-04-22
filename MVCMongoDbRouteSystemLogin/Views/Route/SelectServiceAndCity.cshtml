@@ -16,6 +16,13 @@
 			<div class="form-group">
 				<label class="control-label">Cidades</label> <br /><br />
 				<select asp-items="@(new SelectList(ViewBag.AllCity,"Id", "NameCity"))" class="form-control" name="cityName" id="cityName">
+					<option value="default">CIDADES...</option>
+				</select>
+			</div>
+			<br />
+			<div class="form-group">
+				<label class="control-label">Serviços</label> <br /><br />
+				<select asp-items="@(new SelectList(ViewBag.AllService))" class="form-control" name="serviceName" id="serviceName">
 					<option value="default">SERVIÇOS...</option>
 				</select>
 			</div>
