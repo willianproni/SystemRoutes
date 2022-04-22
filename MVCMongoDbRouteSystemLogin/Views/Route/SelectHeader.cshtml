@@ -2,17 +2,22 @@
 	ViewData["Title"] = "SelectHeader";
 }
 <br />
-<h1>Geração de documento</h1>
+<form asp-action="">
+	<div class="d-flex justify-content-between">
+		<h1 class="d-flex justify-content-center">Geração de documento</h1>
+		<input type="submit" value="Gerar DOC" class="btn btn-outline-secondary" id="btnNext" />
+	</div>
+	<div class="row">
+		<div class="col-md-4">
 
-<div class="row">
-	<div class="col-md-4">
-		<form asp-action="">
 			<div class="form-group">
 				<label class="control-label">Times</label> <br /><br />
 				<select asp-items="@(new SelectList(ViewBag.TeamsAvailable,"Id", "NameTeam"))" class="form-control" name="cityName" id="cityName">
 					<option value="default">Times...</option>
 				</select>
 			</div>
+			<br />
+			<hr />
 			<div class="form-group">
 				@foreach (var person in ViewBag.retornoReadFile)
 				{
@@ -24,10 +29,7 @@
 				}
 			</div>
 			<br />
-			<div class="form-group">
-				<input type="submit" value="Confirmar" class="btn btn-outline-secondary" id="btnNext" />
-			</div>
-		</form>
+		</div>
 	</div>
-</div>
+</form>
 

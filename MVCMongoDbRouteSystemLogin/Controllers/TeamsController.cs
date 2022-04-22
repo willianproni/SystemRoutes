@@ -126,8 +126,7 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
+         
                 try
                 {
                     var personAdd = Request.Form["checkPeopleJoinTeam"].ToList();
@@ -173,7 +172,7 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
+            
             return View(team);
         }
 
