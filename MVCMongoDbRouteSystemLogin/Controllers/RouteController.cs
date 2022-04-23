@@ -13,7 +13,7 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
     {
         public static List<List<string>> routes = new();
         public static List<string> headers = new();
-        public static List<string> serviceList = new();
+        public static IEnumerable<string> serviceList;
         public static string service;
         public static string city;
 
@@ -83,12 +83,11 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
                     content.Add(contentLine);
             }
 
+            var removeRepeatService = listService;
+            var listaSemDuplicidade = removeRepeatService.Distinct();
             headers = header;
             routes = content;
-            serviceList = listService;
-
-
-
+            serviceList = listaSemDuplicidade;
             return RedirectToAction(nameof(SelectServiceAndCity));
         }
 
@@ -103,6 +102,7 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
         public async Task<IActionResult> SelectHeader()
         {
             city = Request.Form["cityName"].ToString();
+            service = Request.Form["serviceName"].ToString();
 
             var team = SeachApi.SeachTeamCityIdInApiAsync(city);
 
@@ -112,10 +112,25 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
             return View();
         }
 
-        public void GenereatorDoc()
+        [HttpPost]
+        public async void GenereatorDoc()
         {
+            List<Team> teams = new();
+            var teamSelect = Request.Form["checkTeamService"].ToList();
+            var headerSelect = Request.Form["checkHeader"].ToList();
+
+
+
+            foreach (var item in teamSelect)
+            {
+                var seachTeam = await SeachApi.SeachTeamIdInApiAsync(item);
+                teams.Add(seachTeam);
+            }
+
+            var seachCity = await SeachApi.SeachCityIdInApiAsync(city);
+
+            DocGenerator.CreateDoc(teams,  headerSelect, routes,  service, seachCity);
 
         }
-
     }
 }

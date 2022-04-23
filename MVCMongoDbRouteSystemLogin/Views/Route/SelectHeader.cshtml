@@ -8,9 +8,9 @@
 
 		<div class="d-flex justify-content-between">
 			<h1 class="d-flex justify-content-center">Geração de documento</h1>
-			<input type="submit" value="Gerar DOC" class="btn btn-outline-secondary" id="btnNext" />
+			
 		</div>
-		<form>
+		<form asp-action="GenereatorDoc">
 			<div class="col-md-4">
 				<div class="form-group">
 					<label>Times</label><br />
@@ -26,12 +26,13 @@
 				<div class="form-group">
 					@foreach (var header in ViewBag.retornoReadFile)
 					{
-						<input name="checkPeopleRemoveTeam" type="checkbox" value=@header>
+						<input name="checkHeader" type="checkbox" value=@header>
 						<label for="@header"> @header</label>
 						<br />
 					}
 				</div>
 				<br />
+				<input type="submit" value="Gerar DOC" class="btn btn-outline-secondary" id="btnNext" />
 			</div>
 		</form>
 	</div>

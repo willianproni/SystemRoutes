@@ -1,17 +1,6 @@
 ﻿@{
 	ViewData["Title"] = "Home Page";
 
-	string[] @servicos = new string[]{
-						"INSTALAÇÃO",
-						"MUDANÇA DE ENDEREÇO",
-						"MUDANÇA DE LOCAL",
-						"REFAZER MANUTENÇÃO",
-						"REINSTALAÇÃO",
-						"RETORNO CREDENCIADA",
-						"SEM SINAL",
-						"TROCA DE TERMINAL",
-						"MANUTENÇÃO",
-						"VISITA TECNICA"};
 }
 
 @using (Html.BeginForm("TeamOperationCity", "route", FormMethod.Post, new { enctype = "multipart/form-data" }))
