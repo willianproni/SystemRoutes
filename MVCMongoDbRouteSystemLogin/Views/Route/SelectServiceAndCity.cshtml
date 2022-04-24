@@ -15,22 +15,40 @@
 			<br />
 			<div class="form-group">
 				<label class="control-label">Cidades</label> <br /><br />
-				<select asp-items="@(new SelectList(ViewBag.AllCity,"Id", "NameCity"))" class="form-control" name="cityName" id="cityName">
+				<select asp-items="@(new SelectList(ViewBag.AllCity,"Id", "NameCity"))" class="form-control" name="cityName" id="cityName" onchange="getCity()">
 					<option value="default">CIDADES...</option>
 				</select>
 			</div>
 			<br />
 			<div class="form-group">
 				<label class="control-label">Serviços</label> <br /><br />
-				<select asp-items="@(new SelectList(ViewBag.AllService))" class="form-control" name="serviceName" id="serviceName">
+				<select asp-items="@(new SelectList(ViewBag.AllService))" class="form-control" name="serviceName" id="serviceName"  onchange="getServise()" disabled>
 					<option value="default">SERVIÇOS...</option>
 				</select>
 			</div>
 			<br />
 			<hr />
 			<div class="form-group">
-				<input type="submit" value="Confirmar" class="btn btn-outline-secondary" id="btnNext" />
+				<input type="submit" value="Confirmar" class="btn btn-outline-secondary" id="buttonProx" disabled/>
 			</div>
 		</form>
 	</div>
 </div>
+
+<script type="text/javascript">
+
+	getCity = () => {
+		let CitySelect = document.querySelector('#cityName').value;
+
+		if(CitySelect != "default")
+			document.querySelector("#serviceName").disabled = false;
+		}
+
+			getServise = () => {
+		let ServiceSelect = document.querySelector('#serviceName').value;
+
+		if(ServiceSelect != "default")
+			document.querySelector("#buttonProx").disabled = false;
+		}
+
+</script>

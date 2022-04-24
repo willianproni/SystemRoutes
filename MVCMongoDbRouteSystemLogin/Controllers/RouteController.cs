@@ -58,26 +58,22 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
             {
                 for (int line = serviceColumn; line <= serviceColumn; line++)
                 {
-                    if (worksheet.Cells[row, serviceColumn].Value?.ToString() != null)
                         listService.Add(worksheet.Cells[row, serviceColumn].Value?.ToString() ?? null);
-
                 }
             }
 
             worksheet.Cells[2, 1, totalRow, totalColumn].Sort(cepColumn, false);
 
-            for (int rows = 2; rows < totalRow; rows++)
+            for (int rows = 1; rows < totalRow; rows++)
             {
                 List<string> contentLine = new();
                 check = false;
                 for (int columns = 1; columns < totalColumn; columns++)
                 {
-                    if (worksheet.Cells[rows, columns].Value?.ToString() != null)
-                    {
                         var conteudo = worksheet.Cells[rows, columns].Value?.ToString() ?? "";
                         contentLine.Add(conteudo);
                         check = true;
-                    }
+                    
                 }
                 if (check)
                     content.Add(contentLine);

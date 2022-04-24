@@ -172,8 +172,6 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            
-            return View(team);
         }
 
         // GET: Teams/Delete/5

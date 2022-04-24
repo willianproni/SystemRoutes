@@ -1,6 +1,7 @@
 ﻿@using Model.MongoDb
 @{
 	ViewData["Title"] = "SelectHeader";
+	int valor = 0;
 }
 <br />
 <div class="row">
@@ -26,9 +27,10 @@
 				<div class="form-group">
 					@foreach (var header in ViewBag.retornoReadFile)
 					{
-						<input name="checkHeader" type="checkbox" value=@header>
+						<input name="checkHeader" type="checkbox" value=@valor>
 						<label for="@header"> @header</label>
 						<br />
+						valor++;
 					}
 				</div>
 				<br />
