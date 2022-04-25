@@ -61,7 +61,7 @@ namespace Services
                                 index += 1 + i;
                             }
 
-                            writer.WriteLine("\n");
+                            writer.WriteLine("\t");
                         }
 
                         if (restDivision >= 0)

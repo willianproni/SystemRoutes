@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model.MongoDb;
@@ -9,6 +10,7 @@ using Services;
 
 namespace MVCMongoDbRouteSystemLogin.Controllers
 {
+    [Authorize]
     public class RouteController : Controller
     {
         public static List<List<string>> routes = new();
@@ -25,65 +27,8 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
         [HttpPost]
         public IActionResult TeamOperationCity(IFormFile file)
         {
-            //service = Request.Form["serviceName"].ToString();
-            //city = Request.Form["cityName"].ToString();
+            (headers, routes, serviceList) = ReadFileExcel.ReadFileInput(file);
 
-            int cepColumn = 0;
-            int serviceColumn = 0;
-            bool check = false;
-            List<string> header = new();
-            List<string> listService = new();
-            List<List<string>> content = new();
-
-
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            using ExcelPackage fileexcel = new(file.OpenReadStream());
-            ExcelWorksheet worksheet = fileexcel.Workbook.Worksheets.FirstOrDefault();
-
-            var totalColumn = worksheet.Dimension.End.Column;
-            var totalRow = worksheet.Dimension.End.Row;
-
-            for (int column = 1; column < totalColumn; column++)
-            {
-                header.Add(worksheet.Cells[1, column].Value.ToString());
-
-                if (worksheet.Cells[1, column].Value.ToString().ToUpper().Equals("CEP"))
-                    cepColumn = column - 1;
-
-                if (worksheet.Cells[1, column].Value.ToString().ToUpper().Equals("SERVIÇO"))
-                    serviceColumn = column;
-            }
-
-            for (int row = 2; row < totalRow; row++)
-            {
-                for (int line = serviceColumn; line <= serviceColumn; line++)
-                {
-                        listService.Add(worksheet.Cells[row, serviceColumn].Value?.ToString() ?? null);
-                }
-            }
-
-            worksheet.Cells[2, 1, totalRow, totalColumn].Sort(cepColumn, false);
-
-            for (int rows = 1; rows < totalRow; rows++)
-            {
-                List<string> contentLine = new();
-                check = false;
-                for (int columns = 1; columns < totalColumn; columns++)
-                {
-                        var conteudo = worksheet.Cells[rows, columns].Value?.ToString() ?? "";
-                        contentLine.Add(conteudo);
-                        check = true;
-                    
-                }
-                if (check)
-                    content.Add(contentLine);
-            }
-
-            var removeRepeatService = listService;
-            var listaSemDuplicidade = removeRepeatService.Distinct();
-            headers = header;
-            routes = content;
-            serviceList = listaSemDuplicidade;
             return RedirectToAction(nameof(SelectServiceAndCity));
         }
 
@@ -100,16 +45,21 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
             city = Request.Form["cityName"].ToString();
             service = Request.Form["serviceName"].ToString();
 
-            var team = SeachApi.SeachTeamCityIdInApiAsync(city);
+            var team = await SeachApi.SeachTeamCityIdInApiAsync(city);
 
-            ViewBag.TeamCity = await team;
+            ViewBag.TeamCity = team;
+
+            if (team.Count == 0)
+            {
+                return BadRequest(new { message = "A cidade selecionada não tem Equipe!!" });
+            }
 
             ViewBag.retornoReadFile = headers;
             return View();
         }
 
         [HttpPost]
-        public async void GenereatorDoc()
+        public async Task<IActionResult> GenereatorDoc()
         {
             List<Team> teams = new();
             var teamSelect = Request.Form["checkTeamService"].ToList();
@@ -125,7 +75,9 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
 
             var seachCity = await SeachApi.SeachCityIdInApiAsync(city);
 
-            DocGenerator.CreateDoc(teams,  headerSelect, routes,  service, seachCity);
+            DocGenerator.CreateDoc(teams, headerSelect, routes, service, seachCity);
+
+            return View();
 
         }
     }

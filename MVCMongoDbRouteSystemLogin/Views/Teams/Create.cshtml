@@ -14,14 +14,14 @@
 		<form asp-action="Create">
 			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 			<div class="form-group">
-				<label asp-for="NameTeam" class="control-label"></label><br /><br />
+				<label>Nome da Equipe</label><br /><br />
 				<input asp-for="NameTeam" class="form-control  border border-secondary" placeholder="Nome do Time..." />
 				<span asp-validation-for="NameTeam" class="text-danger"></span>
 			</div>
 			<br />
 			<div class="form-group">
-				</> <label asp-for="City" class="control-label"></label><br /><br />
-				<select asp-for="City" id="City">
+				<label>Cidade</label><br /><br />
+				<select asp-for="City" id="City" class="form-control border border-secondary">
 					@foreach (City city in await SeachApi.GetAllCityInApi())
 					{
 						<option value="@city.NameCity"> @city.NameCity </option>

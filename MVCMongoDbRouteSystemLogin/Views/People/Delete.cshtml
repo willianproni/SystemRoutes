@@ -37,7 +37,23 @@
 
 	<form asp-action="Delete">
 		<input type="hidden" asp-for="Id" />
-		<input type="submit" value="Delete" class="btn btn-danger" /><br /><hr />
+		@if (@Model.Active == true)
+		{
+			<input type="submit" value="Delete" class="btn btn-danger" name="BtnDelete" id="BtnDelete" />
+
+			<br />
+
+			<hr />
+		}
+		else
+		{
+			<input type="submit" value="Delete" class="btn btn-danger" name="BtnDelete" id="BtnDelete" disabled/>
+			<p>Pessoa se encontra em um Time</p>
+
+			<hr />
+		}
+
 		<a asp-action="Index" class="btn btn-outline-secondary">Retornar</a>
 	</form>
 </div>
+

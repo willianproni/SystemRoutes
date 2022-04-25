@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using MVCMongoDbRouteSystemLogin.Data;
 using Model.MongoDb;
 using Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MVCMongoDbRouteSystemLogin.Controllers
 {
+    [Authorize]
     public class PeopleController : Controller
     {
         private readonly ApplicationDbContext _context;

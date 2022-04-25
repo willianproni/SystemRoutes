@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using MVCMongoDbRouteSystemLogin.Data;
 using Model.MongoDb;
 using Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MVCMongoDbRouteSystemLogin.Controllers
 {
+    [Authorize]
     public class TeamsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,13 +22,11 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
             _context = context;
         }
 
-        // GET: Teams
         public async Task<IActionResult> Index()
         {
             return View(await SeachApi.GetAllTeamInApi());
         }
 
-        // GET: Teams/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -43,15 +43,11 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
             return View(team);
         }
 
-        // GET: Teams/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Teams/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,NameTeam")] Team team)
@@ -72,7 +68,7 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
             }
             else
             {
-               return BadRequest(new { message = "A equipe precisa de pelo menos 1 integrante" });
+                return BadRequest(new { message = "A equipe precisa de pelo menos 1 integrante" });
             }
 
             team.Persons = teamPersons;
@@ -83,7 +79,6 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
 
         }
 
-        // GET: Teams/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -114,9 +109,6 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
             return View(seachCity);
         }
 
-        // POST: Teams/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, [Bind("Id,NameTeam")] Team team)
@@ -125,56 +117,57 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
             {
                 return NotFound();
             }
+            try
+            {
+                var personAdd = Request.Form["checkPeopleJoinTeam"].ToList();
+                var personRemove = Request.Form["checkPeopleRemoveTeam"].ToList();
+                var newCity = Request.Form["City"].FirstOrDefault();
+                var seachTeam = await SeachApi.SeachTeamIdInApiAsync(team.Id);
 
-         
-                try
+                var tradeCity = await SeachApi.SeachCityNameInApi(newCity);
+
+                if (seachTeam.Persons.Count == personRemove.Count && personAdd.Count == 0)
                 {
-                    var personAdd = Request.Form["checkPeopleJoinTeam"].ToList();
-                    var personRemove = Request.Form["checkPeopleRemoveTeam"].ToList();
-                    var newCity = Request.Form["City"].FirstOrDefault();
-
-                    var tradeCity = await SeachApi.SeachCityNameInApi(newCity);
-
-                    if (personAdd.Count != 0)
-                    {
-                        foreach (var persons in personAdd)
-                        {
-                            var seachPerson = await SeachApi.SeachPersonIdInApiAsync(persons);
-
-                            SeachApi.UpdateTeamInsert(id, seachPerson);
-                        }
-                    }
-
-                    if (personRemove.Count != 0)
-                    {
-                        foreach (var persons in personRemove)
-                        {
-                            var seachPerson = await SeachApi.SeachPersonIdInApiAsync(persons);
-
-                            SeachApi.UpdateTeamRemove(id, seachPerson);
-                        }
-                    }
-
-                    var seachTeam = await SeachApi.SeachTeamIdInApiAsync(id);
-
-                    seachTeam.City = tradeCity;
-                    SeachApi.UpdateTeam(id, seachTeam);
+                    return BadRequest(new { message = "A equipe tem que ter no minimo 1 integrante!" });
                 }
-                catch (DbUpdateConcurrencyException)
+
+                if (personAdd.Count != 0)
                 {
-                    if (!TeamExists(team.Id))
+                    foreach (var persons in personAdd)
                     {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
+                        var seachPerson = await SeachApi.SeachPersonIdInApiAsync(persons);
+
+                        SeachApi.UpdateTeamInsert(id, seachPerson);
                     }
                 }
-                return RedirectToAction(nameof(Index));
+
+                if (personRemove.Count != 0)
+                {
+                    foreach (var persons in personRemove)
+                    {
+                        var seachPerson = await SeachApi.SeachPersonIdInApiAsync(persons);
+
+                        SeachApi.UpdateTeamRemove(id, seachPerson);
+                    }
+                }
+
+                seachTeam.City = tradeCity;
+                SeachApi.UpdateTeam(id, seachTeam);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!TeamExists(team.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
         }
 
-        // GET: Teams/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -191,7 +184,6 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
             return View(team);
         }
 
-        // POST: Teams/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
