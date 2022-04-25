@@ -1,7 +1,20 @@
-﻿
-@{
-    ViewData["Title"] = "Documento Gerado";
+﻿@{
+	ViewData["Title"] = "Documento Gerado";
 }
 
-<h1>Documento Gerado no Desktop!</h1>
+<div class="row">
+	<div class="alert alert-dismissible alert-success">
+		<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+		<strong>Sucesso!</strong> Deseja voltar para a Tela de Upload? <a asp-controller="Home" asp-action="Index" class="alert-link">Retornar Upload</a>.
+	</div>
+	<form asp-action="Download">
+		<div class="d-flex justify-content-center">
+			<h3><strong>Arquivo de rotas gerado com sucesso!</strong></h3>
+		</div>
+		<hr />
+		<div class="d-flex justify-content-center">
+			<input type="submit" value="Download" class="btn btn-outline-secondary justify-content-center" />
+		</div>
+	</form>
+</div>
 

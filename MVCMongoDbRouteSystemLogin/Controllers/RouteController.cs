@@ -2,22 +2,31 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model.MongoDb;
 using OfficeOpenXml;
 using Services;
+using System.IO;
 
 namespace MVCMongoDbRouteSystemLogin.Controllers
 {
     [Authorize]
     public class RouteController : Controller
     {
+        private static IWebHostEnvironment _hostEnvironment;
         public static List<List<string>> routes = new();
         public static List<string> headers = new();
         public static IEnumerable<string> serviceList;
         public static string service;
         public static string city;
+        public static string downloadFile;
+
+        public RouteController(IWebHostEnvironment hostEnvironment)
+        {
+            _hostEnvironment = hostEnvironment;
+        }
 
         public IActionResult Index()
         {
@@ -65,8 +74,6 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
             var teamSelect = Request.Form["checkTeamService"].ToList();
             var headerSelect = Request.Form["checkHeader"].ToList();
 
-
-
             foreach (var item in teamSelect)
             {
                 var seachTeam = await SeachApi.SeachTeamIdInApiAsync(item);
@@ -75,10 +82,18 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
 
             var seachCity = await SeachApi.SeachCityIdInApiAsync(city);
 
-            DocGenerator.CreateDoc(teams, headerSelect, routes, service, seachCity);
+            var receiveDocument = await DocGenerator.CreateDoc(teams, headerSelect, routes, service, seachCity, _hostEnvironment.WebRootPath);
+
+            downloadFile = $"{_hostEnvironment.WebRootPath}//files//{receiveDocument}";
 
             return View();
+        }
 
+        public FileContentResult Download()
+        {
+            var fileDownload = downloadFile.Split("//").ToList();
+            var file = System.IO.File.ReadAllBytes(downloadFile);
+            return File(file, "application/octet-stream", fileDownload.Last().ToString());
         }
     }
 }

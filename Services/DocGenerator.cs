@@ -11,35 +11,41 @@ namespace Services
 {
     public class DocGenerator
     {
-        public static async void CreateDoc(List<Team> team, List<string> checkOption, List<List<string>> routes, string serviceSelect, City city)
+        public static async Task<string> CreateDoc(List<Team> team, List<string> checkOption, List<List<string>> routes, string serviceSelect, City city, string webRoot)
         {
-            var routesCount = routes.Count;
-            var allColumn = routes[0];
+            var routesCount = routes.Count; //Conta a quantidade de rotas
+            var allColumn = routes[0]; //Localiza colunas
 
-            var serviceColumn = routes[0].FindIndex(column => column == "SERVIÇO" || column == "serviço");
-            var cityColumn = routes[0].FindIndex(column => column == "CIDADE" || column == "cidade");
-            var cepColumn = routes[0].FindIndex(column => column == "CEP" || column == "cep");
+            var serviceColumn = routes[0].FindIndex(column => column == "SERVIÇO" || column == "serviço"); //Localiza em qual coluna está o serviço
+            var cityColumn = routes[0].FindIndex(column => column == "CIDADE" || column == "cidade"); //Localiza em qual coluna está a cidade
+            var cepColumn = routes[0].FindIndex(column => column == "CEP" || column == "cep"); //Localiza em qual coluna está o cep
 
             for (int i = 0; i < routesCount; i++)
             {
-                routes.Remove(routes.Find(route => route[cityColumn].ToUpper() != city.NameCity.ToUpper()));
-                //routes.Remove(routes.Find(route => route[serviceColumn].ToUpper() != serviceSelect.ToUpper()));
+                routes.Remove(routes.Find(route => route[cityColumn].ToUpper() != city.NameCity.ToUpper())); //Verifica as cidades que tem nomes diferentes da cidade selecionada e deleta elas
             }
 
-            var divisionTeam = routes.Count / team.Count;
-            var restDivision = routes.Count % team.Count;
+            var divisionTeam = routes.Count / team.Count; //Divide as equipes pelo serviço
+            var restDivision = routes.Count % team.Count; //Se sobra serviço realiza o resto da divisão para dividir eles entre as equipes
 
             var index = 0;
 
-            var filename = $@"C:\Users\Willian Proni\Desktop\Rota-{serviceSelect}-{DateTime.Now:dd-MM-yyyy}.docx";
+            var pathFiles = $"{webRoot}//files";
 
-            using (FileStream fileStream = new(filename, FileMode.CreateNew))
+            if (!Directory.Exists(pathFiles))
+                Directory.CreateDirectory(pathFiles);
+
+            var filename = $"Rota-{serviceSelect}-{DateTime.Now:dd-MM-yyyy}.docx"; //Local e nome do arquivo a ser salvo
+
+            var CreateFile = $"{pathFiles}//{filename}";
+
+            using (FileStream fileStream = new(CreateFile, FileMode.Create))
             {
                 await using (StreamWriter writer = new(fileStream, Encoding.UTF8))
                 {
                     writer.WriteLine($"{serviceSelect} - {DateTime.Now:dd/MM/yyyy}\t {city.NameCity}\n\n");
 
-                    foreach (var item in team)
+                    foreach (var item in team) //Escrita do arquivo localiza os times
                     {
                         writer.WriteLine("Time: " + item.NameTeam + "\nRotas:\n");
 
@@ -74,6 +80,7 @@ namespace Services
                 }
                 fileStream.Close();
             }
+            return filename;
         }
     }
 }
