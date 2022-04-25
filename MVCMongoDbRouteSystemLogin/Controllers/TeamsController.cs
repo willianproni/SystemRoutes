@@ -68,7 +68,8 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
             }
             else
             {
-                return BadRequest(new { message = "A equipe precisa de pelo menos 1 integrante" });
+                TempData["error"] = "A equipe deve ter ao menos 1 integrante";
+                return View(team);
             }
 
             team.Persons = teamPersons;
