@@ -59,7 +59,7 @@ na sequência.
   </h3>
     
 <li>
-   Editar pessoa não edita nome em time
+   Editar pessoa na API, não edita o nome da mesma em Equipe
   
   <hr>
   <h4>Obs:</h4> 
