@@ -22,7 +22,7 @@
 			</div>
 			<div class="form-group">
 				<label for="exampleSelect1" class="form-label mt-4">Cidade</label>
-				<select asp-for="City" id="City">
+				<select asp-for="City" id="City" class="form-control border border-secondary">
 					@foreach (City city in await SeachApi.GetAllCityInApi())
 					{
 						<option value="@city.NameCity"> @city.NameCity </option>
