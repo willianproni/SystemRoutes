@@ -22,7 +22,8 @@ namespace Services
 
             for (int i = 0; i < routesCount; i++)
             {
-                routes.Remove(routes.Find(route => route[cityColumn].ToUpper() != city.NameCity.ToUpper())); //Verifica as cidades que tem nomes diferentes da cidade selecionada e deleta elas
+                routes.Remove(routes.Find(route => route[cityColumn].ToUpper().Replace("Ú", "U").Replace("Ã", "A") != city.NameCity.ToUpper().Replace("Ú", "U").Replace("Ã", "A"))); //Verifica as cidades que tem nomes diferentes da cidade selecionada e deleta elas
+                routes.Remove(routes.Find(route => route[serviceColumn].ToUpper() != serviceSelect.ToUpper()));
             }
 
             var divisionTeam = routes.Count / team.Count; //Divide as equipes pelo serviço

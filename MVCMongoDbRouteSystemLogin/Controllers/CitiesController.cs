@@ -127,9 +127,19 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var seachCity = await SeachApi.SeachCityIdInApiAsync(id);
-            SeachApi.RemoveCity(id);
-            return RedirectToAction(nameof(Index));
+            var seachTeamInCity = await SeachApi.SeachTeamCityIdInApiAsync(id);
+            if (seachTeamInCity.Count == 0)
+            {
+                var seachCity = await SeachApi.SeachCityIdInApiAsync(id);
+                SeachApi.RemoveCity(id);
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                TempData["error"] = "A cidade não pode ser removida pois está vinculada a uma equipe!";
+                return RedirectToAction(nameof(Delete));
+            }
+            
         }
 
         private bool CityExists(string id)

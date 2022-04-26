@@ -23,7 +23,10 @@ namespace Services
             List<string> header = new();
             List<string> listService = new();
             List<List<string>> content = new();
+            try
+            {
 
+           
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             using ExcelPackage fileexcel = new(file.OpenReadStream());
             ExcelWorksheet worksheet = fileexcel.Workbook.Worksheets.FirstOrDefault();
@@ -73,6 +76,12 @@ namespace Services
             return (header,
             content,
             listaSemDuplicidade);
+            }
+            catch (System.IO.InvalidDataException)
+            {
+
+                return (null, null, null);
+            }
         }
     }
 }

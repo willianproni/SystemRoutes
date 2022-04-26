@@ -36,8 +36,16 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
         [HttpPost]
         public IActionResult TeamOperationCity(IFormFile file)
         {
+            
             (headers, routes, serviceList) = ReadFileExcel.ReadFileInput(file);
 
+            if (headers == null && routes == null && serviceList == null)
+            {
+                TempData["error"] = "Arquivo selecionado inválido";
+                return RedirectToRoute(new { controller = "Home", Action = "Index" });
+            }
+       
+            
             return RedirectToAction(nameof(SelectServiceAndCity));
         }
 
@@ -74,6 +82,17 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
             List<Team> teams = new();
             var teamSelect = Request.Form["checkTeamService"].ToList();
             var headerSelect = Request.Form["checkHeader"].ToList();
+
+            if (teamSelect.Count == 0)
+            {
+                TempData["error"] = "Selecione pelo menos uma equipe";
+                return RedirectToAction(nameof(SelectServiceAndCity));
+            }
+            if (headerSelect.Count == 0)
+            {
+                TempData["error"] = "Selecione pelo menos uma opção";
+                return RedirectToAction(nameof(SelectServiceAndCity));
+            }
 
             foreach (var item in teamSelect)
             {
