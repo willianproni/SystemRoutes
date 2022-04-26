@@ -15,6 +15,7 @@ namespace Model.MongoDb
         public string Id { get; set; }
         [Display(Name ="Nome")]
         [Required(ErrorMessage ="Digite o nome da pessoa.")]
+        //[RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "Números e caracteres especiais não são permitidos no nome.")]
         public string Name { get; set; }
         public bool Active { get; set; }
     }

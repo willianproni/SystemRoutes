@@ -93,7 +93,8 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
             }
 
             var seachCity = await SeachApi.SeachTeamIdInApiAsync(id);
-
+            var AllCity = await SeachApi.GetAllCityInApi();
+            ViewBag.AllCity = AllCity;
             var seachPeple = await SeachApi.GetAllPersonStatusTrue();
 
             var SeachTeam = await SeachApi.SeachTeamIdInApiAsync(id);
@@ -130,7 +131,7 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
                 var newCity = Request.Form["City"].FirstOrDefault();
                 var seachTeam = await SeachApi.SeachTeamIdInApiAsync(team.Id);
 
-                var tradeCity = await SeachApi.SeachCityNameInApi(newCity);
+                var tradeCity = await SeachApi.SeachCityIdInApiAsync(newCity);
 
                 if (seachTeam.Persons.Count == personRemove.Count && personAdd.Count == 0)
                 {
@@ -157,7 +158,7 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
                         SeachApi.UpdateTeamRemove(id, seachPerson);
                     }
                 }
-
+                seachTeam.NameTeam = team.NameTeam;
                 seachTeam.City = tradeCity;
                 SeachApi.UpdateTeam(id, seachTeam);
             }

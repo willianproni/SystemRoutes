@@ -14,8 +14,10 @@ namespace Model
         [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
         public string Id { get; set; }
         [Required(ErrorMessage = "Digite o nome da cidade.")]
+       // [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "Números e caracteres especiais não são permitidos no nome da cidade.")]
         public string NameCity { get; set; }
         [Required(ErrorMessage = "Digite o nome do estado.")]
+       // [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "Números e caracteres especiais não são permitidos no do estado.")]
         public string State { get; set; }
     }
 }
