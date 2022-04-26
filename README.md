@@ -17,8 +17,7 @@ ser executado e qual cidade será criada a rota.<br>
 O arquivo DOCX gerado deve seguir o template abaixo. Os dados adicionais
 que poderão ser utilizados que não constam no modelo podem ser inseridos
 na sequência.
-  
-  
+ 
   <hr>       
         <h3>
   Banco Utilizado:
@@ -53,7 +52,7 @@ na sequência.
     
   
   <hr>
-  
+                                          
 <h3>
     Falta Fazer:
   </h3>
@@ -66,4 +65,33 @@ na sequência.
   Ao cadastrar no MVC o novo regristro pode não aparecer, realizar a atualização da página para aparecer o novo registro<br>
   Lembrar de Alterar o arquivo AppSettings.Json para a rota da máquina utilizada
   
+  <hr>
+  
+  ### Pré-requisitos
+
+Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
+[Banco de Dados MongoDB](https://www.mongodb.com/). 
+Além disto é bom ter um editor para trabalhar com o código como [Visual Studio](https://visualstudio.microsoft.com/pt-br/vs/)
+
+### 🎲 Rodando o Back End (servidor)
+
+```bash
+# Clone este repositório
+
+# Acesse os micro serviços
+
+# Vá para o arquivo appsettings.json
+
+# Altere as conexões para o padrão do seu MongoDB
+$ ConnectionString
+
+# Execute a aplicação em modo de desenvolvimento
+
+# O servidor inciará na porta:(Aleatória)
+```
+  
+  <hr>
+  
+  <hr>
+    <img src="https://img.shields.io/static/v1?label=System&message=WillRotas&color=7159c1&style=for-the-badge&logo=ghost"/>
     
