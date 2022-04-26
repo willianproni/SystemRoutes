@@ -76,8 +76,6 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
             team.City = seachCity;
             SeachApi.PostTeam(team);
             return RedirectToAction(nameof(Index));
-
-
         }
 
         public async Task<IActionResult> Edit(string id)
@@ -129,7 +127,8 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
 
                 if (seachTeam.Persons.Count == personRemove.Count && personAdd.Count == 0)
                 {
-                    return BadRequest(new { message = "A equipe tem que ter no minimo 1 integrante!" });
+                    TempData["error"] = "A equipe deve ter ao menos 1 integrante";
+                    return RedirectToAction(nameof(Edit));
                 }
 
                 if (personAdd.Count != 0)

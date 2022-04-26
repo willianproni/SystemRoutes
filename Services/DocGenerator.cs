@@ -28,16 +28,16 @@ namespace Services
             var divisionTeam = routes.Count / team.Count; //Divide as equipes pelo serviço
             var restDivision = routes.Count % team.Count; //Se sobra serviço realiza o resto da divisão para dividir eles entre as equipes
 
-            var index = 0;
+            var index = 0; //Contagem
 
-            var pathFiles = $"{webRoot}//files";
+            var pathFiles = $"{webRoot}//files"; //Cria uma pasta Files em wwwroot
 
-            if (!Directory.Exists(pathFiles))
+            if (!Directory.Exists(pathFiles)) //Verifica se a pasta já existe
                 Directory.CreateDirectory(pathFiles);
 
             var filename = $"Rota-{serviceSelect}-{DateTime.Now:dd-MM-yyyy}.docx"; //Local e nome do arquivo a ser salvo
 
-            var CreateFile = $"{pathFiles}//{filename}";
+            var CreateFile = $"{pathFiles}//{filename}"; //Criação do documento
 
             using (FileStream fileStream = new(CreateFile, FileMode.Create))
             {
@@ -67,13 +67,13 @@ namespace Services
                                 index += 1 + i;
                             }
 
-                            writer.WriteLine("\t");
+                            writer.WriteLine("\n");
                         }
 
                         if (restDivision >= 0)
                             divisionTeam--;
 
-                        writer.WriteLine("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+                        writer.WriteLine("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
                     }
 
                     writer.Close();
