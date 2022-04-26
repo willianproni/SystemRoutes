@@ -60,7 +60,7 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
 
             if (team.Count == 0)
             {
-                TempData["error"] = "A equipe deve ter ao menos 1 integrante";
+                TempData["error"] = "Cidade selecionada não tem Equipe";
                 return RedirectToAction(nameof(SelectServiceAndCity));
             }
 
