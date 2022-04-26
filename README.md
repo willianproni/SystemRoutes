@@ -92,6 +92,5 @@ $ ConnectionString
   
   <hr>
   
-  <hr>
     <img src="https://img.shields.io/static/v1?label=System&message=WillRotas&color=7159c1&style=for-the-badge&logo=ghost"/>
     
