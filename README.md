@@ -2,42 +2,55 @@
   Sistema de Rotas
   </h1>
   
-  <p>Objetivo, Desenvolver um Projeto para "Cadastrar" rotas de serviço de uma determinada empresa, com as informações de rotas gerar um relatório Word(.doc) a respeito do dia atual, mostrando todas as rotas realizadas naquele determinado dia!!</p>
+  <p>Objetivo, Desenvolver um Projeto para Gerenciar rotas de se serviço vinda(Upload) de um arquivo .xlsx, com as informações de rotas gerar um relatório Word(.doc) a respeito do dia atual, mostrando todas as rotas realizadas naquele determinado dia.</p>
+  <h4>
+  Descrição do Fluxo do Programa
+  </h4>
+  <p>
+O usuário deverá fazer o login no aplicativo. Ao fazer o login, deverá fazer o
+upload do arquivo em formato XLSX. <br>
+O cabeçalho da planilha deve ser exibido como uma lista de seleções para
+que o usuário selecione as colunas de dados que serão utilizadas para gerar
+o arquivo DOCX. <br>
+A seguir, o usuário poderá aplicar um filtro relacionado ao tipo de serviço a
+ser executado e qual cidade será criada a rota.<br>
+O arquivo DOCX gerado deve seguir o template abaixo. Os dados adicionais
+que poderão ser utilizados que não constam no modelo podem ser inseridos
+na sequência.
   
-  <hr>
- 
-  <h2>Bibliotecas utilizadas</h2>
+  
+  <hr>       
+        <h3>
+  Banco Utilizado
+  </h3>
   
   <li>
-    EPPlus
+  SQL Server para Identity
   <li>
-    Dapper
-    <li>
-      Microsoft.Extensions.Configuration.FileExtensions
-      <li>
-        Microsoft.Extensions.Configuration.Json
- 
+    MongoDB para criação das API
+  
   <hr>
-        
         
   <h3>
-    Feito até o Momento:
+    Concluído
     </h3>
 
-<li>
-      Leitura do Arquivo Excel(.xlsx) utilizando Dapper(SQL Server)
-    <li>
-    Converter em Word(Arquivo .doc)
-          <li>
+   <li>
     API de Pessoas
                 <li>
     API de Cidades
                   <li>
     API do Times
                       <li>
-    CRUD Pessoas
+    Model View Controler
                    <li>
-    CRUD Cidades
+    Validações
+                                        <li>
+                                              Upload
+                                        <li>
+                                          download do documento gerado 
+
+    
   
   <hr>
   
@@ -46,11 +59,11 @@
   </h3>
     
 <li>
-   CRUD Times
-  <li>
-    Gerador de Rota
-  
+   Editar pessoa não edita nome em time
   
   <hr>
-  Obs: Ao cadastrar no MVC o novo regristro pode não aparecer, realizar a atualização da página para aparecer o novo registro
+  <h4>Obs:</h4> 
+  Ao cadastrar no MVC o novo regristro pode não aparecer, realizar a atualização da página para aparecer o novo registro<br>
+  Lembrar de Alterar o arquivo AppSettings.Json para a rota da máquina utilizada
+  
     
