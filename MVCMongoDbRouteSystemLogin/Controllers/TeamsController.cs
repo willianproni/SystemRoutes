@@ -55,6 +55,13 @@ namespace MVCMongoDbRouteSystemLogin.Controllers
             List<Person> teamPersons = new List<Person>();
 
             var cityCheck = Request.Form["city"].FirstOrDefault();
+
+            if (cityCheck == null)
+            {
+                TempData["error"] = "A cidade da equipe deve ser selecionada";
+                return View(team);
+            }
+
             var seachCity = await SeachApi.SeachCityNameInApi(cityCheck);
             var personCheck = Request.Form["checkPeopleTeam"].ToList();
 
