@@ -34,7 +34,7 @@ namespace Services
             var totalColumn = worksheet.Dimension.End.Column;
             var totalRow = worksheet.Dimension.End.Row;
 
-            for (int column = 1; column < totalColumn; column++)
+            for (int column = 1; column <= totalColumn; column++)
             {
                 header.Add(worksheet.Cells[1, column].Value.ToString());
 
@@ -59,7 +59,7 @@ namespace Services
             {
                 List<string> contentLine = new();
                 check = false;
-                for (int columns = 1; columns < totalColumn; columns++)
+                for (int columns = 1; columns <= totalColumn; columns++)
                 {
                     var conteudo = worksheet.Cells[rows, columns].Value?.ToString() ?? "";
                     contentLine.Add(conteudo);
